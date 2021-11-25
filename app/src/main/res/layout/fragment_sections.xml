@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp">
+
+            <TextView
+                android:id="@+id/tvPerSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_bg"
+                android:drawablePadding="10dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:text="@string/personal_details"
+                android:textColor="#18191A"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/person"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvEduSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_bg"
+                android:drawablePadding="10dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:text="Education"
+                android:textColor="#18191A"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/education"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPerSection" />
+
+            <TextView
+                android:id="@+id/tvProfDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_bg"
+                android:drawablePadding="10dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:text="Professional Details"
+                android:textColor="#18191A"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/profession_detail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvEduSection" />
+
+            <TextView
+                android:id="@+id/tvSkills"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_bg"
+                android:drawablePadding="10dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:text="Skills"
+                android:textColor="#18191A"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/ic_twotone_shield_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvProfDetails" />
+
+            <TextView
+                android:id="@+id/tvObjective"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_bg"
+                android:drawablePadding="10dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:text="Objective"
+                android:textColor="#18191A"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/ic_baseline_flag_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSkills" />
+
+            <TextView
+                android:id="@+id/tvProject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_bg"
+                android:drawablePadding="10dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:text="Project"
+                android:textColor="#18191A"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/ic_baseline_sd_card_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvObjective" />
+
+            <TextView
+                android:id="@+id/tvAddMore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_bg"
+                android:drawablePadding="10dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:text="Add more sections"
+                android:textColor="#18191A"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/ic_baseline_add_circle_outline_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvProject" />
+
+            <TextView
+                android:id="@+id/tvManageSec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Manage Sections"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAddMore" />
+
+            <TextView
+                android:id="@+id/tvRearrange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_bg"
+                android:drawablePadding="10dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:text="Rearrange sections"
+                android:textColor="#18191A"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/ic_baseline_view_headline_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvManageSec" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="view_resume">View Resume</string>
+    <string name="name">Name</string>
+    <string name="job_title">Job title</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="linkedin_url">LinkedIn URL</string>
+    <string name="personal_website_optional">Personal Website (Optional)</string>
+    <string name="email">Email</string>
+    <string name="save">Save</string>
+    <string name="profile_pic">Profile_Pic</string>
+    <string name="add">Add</string>
+    <string name="education_1">Education 1</string>
+    <string name="lorem_ipsum_dolor_sit">Lorem ipsum dolor sit</string>
+    <string name="lorem_ipsum_dolor_sit_amet_consectetur_adipiscing">Lorem ipsum dolor sit amet, consectetur adipiscing</string>
+</resources>
