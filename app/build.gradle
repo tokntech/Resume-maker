@@ -6,15 +6,15 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         configurations.all {
             resolutionStrategy { force 'androidx.core:core-ktx:1.6.0' }
         }
         applicationId "com.nikitha.toknresumebuilder"
-        minSdk 21
-        targetSdk 30
+        minSdk 26
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -45,7 +45,7 @@ android {
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -54,7 +54,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //Tool bar - material design
-    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
 
     def room_version = "2.3.0"
@@ -68,4 +68,12 @@ dependencies {
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
 
     implementation "androidx.webkit:webkit:1.4.0"
+
+    //material image view -circular
+    implementation 'com.google.android.material:material:1.6.0-alpha01'
+
+
+    //activity results API
+    implementation 'androidx.activity:activity-ktx:1.4.0'
+    implementation 'androidx.fragment:fragment-ktx:1.4.0'
 }

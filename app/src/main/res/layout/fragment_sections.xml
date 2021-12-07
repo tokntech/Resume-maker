@@ -34,7 +34,8 @@
                 app:drawableStartCompat="@drawable/person"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:drawableEndCompat="@drawable/two_checks" />
 
             <TextView
                 android:id="@+id/tvEduSection"
@@ -51,7 +52,8 @@
                 app:drawableStartCompat="@drawable/education"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvPerSection" />
+                app:layout_constraintTop_toBottomOf="@+id/tvPerSection"
+                app:drawableEndCompat="@drawable/two_checks" />
 
             <TextView
                 android:id="@+id/tvProfDetails"
@@ -68,7 +70,8 @@
                 app:drawableStartCompat="@drawable/profession_detail"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvEduSection" />
+                app:layout_constraintTop_toBottomOf="@+id/tvEduSection"
+                app:drawableEndCompat="@drawable/two_checks" />
 
             <TextView
                 android:id="@+id/tvSkills"
@@ -85,7 +88,8 @@
                 app:drawableStartCompat="@drawable/ic_twotone_shield_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvProfDetails" />
+                app:layout_constraintTop_toBottomOf="@+id/tvProfDetails"
+                app:drawableEndCompat="@drawable/two_checks" />
 
             <TextView
                 android:id="@+id/tvObjective"
@@ -102,7 +106,8 @@
                 app:drawableStartCompat="@drawable/ic_baseline_flag_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvSkills" />
+                app:layout_constraintTop_toBottomOf="@+id/tvSkills"
+                app:drawableEndCompat="@drawable/mix_check" />
 
             <TextView
                 android:id="@+id/tvProject"
@@ -119,6 +124,7 @@
                 app:drawableStartCompat="@drawable/ic_baseline_sd_card_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:drawableEndCompat="@drawable/mix_check"
                 app:layout_constraintTop_toBottomOf="@+id/tvObjective" />
 
             <TextView
@@ -132,6 +138,7 @@
                 android:paddingBottom="20dp"
                 android:text="Add more sections"
                 android:textColor="#18191A"
+                app:drawableEndCompat="@drawable/grey_check"
                 android:textSize="16sp"
                 app:drawableStartCompat="@drawable/ic_baseline_add_circle_outline_24"
                 app:layout_constraintEnd_toEndOf="parent"

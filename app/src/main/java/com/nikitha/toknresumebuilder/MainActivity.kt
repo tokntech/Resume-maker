@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //For the view resume menu option
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.options, menu)
         return super.onCreateOptionsMenu(menu)
     }

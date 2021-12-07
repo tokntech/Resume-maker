@@ -1,12 +1,15 @@
 package com.nikitha.toknresumebuilder.fragments
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.databinding.FragmentSectionsBinding
 
@@ -31,7 +34,7 @@ class SectionsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentSectionsBinding.inflate(layoutInflater)
 
@@ -41,6 +44,11 @@ class SectionsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val colorDrawable = ColorDrawable(Color.TRANSPARENT)
+        (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
+        (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         binding.tvPerSection.setOnClickListener {
             val fragment = PersonalDetailsFragment()
             activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
@@ -48,6 +56,11 @@ class SectionsFragment : Fragment() {
 
         binding.tvEduSection.setOnClickListener {
             val fragment = EducationDetailsFragment()
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
+        }
+
+        binding.tvProfDetails.setOnClickListener {
+            val fragment = ProfessionalDetailsFragment()
             activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
         }
 
@@ -63,4 +76,5 @@ class SectionsFragment : Fragment() {
 
 
     }
+
 }

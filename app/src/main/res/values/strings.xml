@@ -2,20 +2,37 @@
     <string name="app_name">ToknResumeBuilder</string>
     <string name="view_resume">View Resume</string>
     <string name="name">Name</string>
-    <string name="job_title">Job title</string>
+    <string name="job_title">Job title (optional)</string>
     <string name="phone_number">Phone Number</string>
-    <string name="linkedin_url">LinkedIn URL</string>
-    <string name="personal_website_optional">Personal Website (Optional)</string>
-    <string name="email">Email</string>
+    <string name="linkedin_url">LinkedIn URL (optional)</string>
+    <string name="home_address_optional">Home Address (Optional)</string>
+    <string name="email">Email id</string>
     <string name="save">Save</string>
     <string name="profile_pic">Profile_Pic</string>
     <string name="add">Add</string>
-    <string name="education_1">Education 1</string>
+    <string name="education_1">Education</string>
     <string name="personal_details">Personal Details</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="lorem_ipsum_dolor_sit">Lorem ipsum dolor sit</string>
     <string name="lorem_ipsum_dolor_sit_amet_consectetur_adipiscing">Lorem ipsum dolor sit amet, consectetur adipiscing</string>
+    <string name="experience_1">Experience 1</string>
+    <string name="profile">Profile</string>
+    <string name="organization">Organization</string>
+    <string name="grade_score">Grade/Score</string>
+    <string name="start_year">Start Year</string>
+    <string name="end_year">End Year</string>
+    <string name="work_from_home">Work from home</string>
+    <string name="location">Location</string>
+    <string name="job_description">Job Description</string>
+    <string name="get_started">Get Started</string>
+    <string name="skip">Skip</string>
+    <string name="use_our_free_templates_to_build_your_resume">Use our free templates to build your resume</string>
+    <string name="pick_a_resume_template">Pick a resume template!</string>
+    <string name="add_another_section">Add another section</string>
+    <string name="save_amp_proceed"><![CDATA[Save & proceed]]></string>
+    <string name="save_amp_n_proceed"><![CDATA[Save &\n proceed]]></string>
+    <string name="previous">Previous</string>
 
     <array name="re_arrange_sections">
         <item>Personal Details</item>
@@ -29,6 +46,18 @@
     <array name="re_arrange_drawable">
         <item>R.drawable.person</item>
         <item>R.drawable.education</item>
+    </array>
+
+    <array name="onboarding_text">
+        <item>Pick a resume template!</item>
+        <item>Customize to your liking!</item>
+        <item>Share easily to get the job!</item>
+    </array>
+
+    <array name="onboarding_subtext">
+        <item>Use our free templates to build your resume</item>
+        <item>Add sections, modify the order and save the progress</item>
+        <item>Build the best version of your resume and apply</item>
     </array>
 
 </resources>

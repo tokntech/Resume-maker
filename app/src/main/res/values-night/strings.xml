@@ -13,4 +13,21 @@
     <string name="education_1">Education 1</string>
     <string name="lorem_ipsum_dolor_sit">Lorem ipsum dolor sit</string>
     <string name="lorem_ipsum_dolor_sit_amet_consectetur_adipiscing">Lorem ipsum dolor sit amet, consectetur adipiscing</string>
+    <string name="experience_1">Experience 1</string>
+    <string name="profile">Profile</string>
+    <string name="organization">Organization</string>
+    <string name="grade_score">Grade/Score</string>
+    <string name="start_year">Start Year</string>
+    <string name="end_year">End Year</string>
+    <string name="work_from_home">Work from home</string>
+    <string name="location">Location</string>
+    <string name="job_description">Job Description</string>
+    <string name="get_started">Get Started</string>
+    <string name="skip">Skip</string>
+    <string name="use_our_free_templates_to_build_your_resume">Use our free templates to build your resume</string>
+    <string name="pick_a_resume_template">Pick a resume template!</string>
+    <string name="add_another_section">Add another section</string>
+    <string name="save_amp_proceed"><![CDATA[Save & proceed]]></string>
+    <string name="save_amp_n_proceed"><![CDATA[Save &\n proceed]]></string>
+    <string name="previous">Previous</string>
 </resources>

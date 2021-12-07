@@ -11,26 +11,26 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_weight="1"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/tvIntoText"
+        android:id="@+id/tvIntroText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/lorem_ipsum_dolor_sit"
+        android:text="@string/pick_a_resume_template"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tvIntoText2"
+        android:id="@+id/tvIntroText2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="12dp"
         android:gravity="center"
-        android:text="@string/lorem_ipsum_dolor_sit_amet_consectetur_adipiscing"
+        android:text="@string/use_our_free_templates_to_build_your_resume"
         android:textColor="@color/black"
         android:textSize="14sp" />
 
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            app:piv_animationType="drop"
+            app:piv_animationType="worm"
             app:piv_dynamicCount="true"
             app:piv_interactiveAnimation="true"
             app:piv_padding="12dp"
@@ -55,13 +55,34 @@
             app:piv_unselectedColor="@color/colorControlActivated"
             app:piv_viewPager="@id/viewPager_startup" />
     </LinearLayout>
+
     <Button
         android:id="@+id/btnGetStarted"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/button_bg"
-        android:text="Get Started" />
+        android:text="@string/get_started"
+        android:textAllCaps="false"
+        app:cornerRadius="10dp" />
+
+    <Button
+        android:id="@+id/btnSkip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@android:color/transparent"
+        android:text="@string/skip"
+        android:textAllCaps="false"
+        android:textColor="@color/color_primary"
+        android:visibility="visible" />
+
+
 
 </LinearLayout>

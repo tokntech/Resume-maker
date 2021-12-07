@@ -1,28 +1,29 @@
 package com.nikitha.toknresumebuilder.fragments
 
+
 import android.content.Context
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebResourceRequest
-import android.webkit.WebResourceResponse
-import android.webkit.WebSettings
-import android.webkit.WebView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.webkit.WebViewAssetLoader
-import androidx.webkit.WebViewClientCompat
+import androidx.fragment.app.Fragment
 import com.nikitha.toknresumebuilder.databinding.FragmentPreviewBinding
 import com.nikitha.toknresumebuilder.model.PersonalDetails
+import com.nikitha.toknresumebuilder.model.School
+import android.print.PrintManager
+import android.print.PrintDocumentAdapter
+import android.print.PrintJob
+import android.webkit.WebView
+import android.print.PrintAttributes
+import com.nikitha.toknresumebuilder.model.Projects
 
 
 class PreviewFragment : Fragment() {
 
 private lateinit var binding: FragmentPreviewBinding
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +40,10 @@ private lateinit var binding: FragmentPreviewBinding
 
         val bundle = this.arguments
         val personalDetails = bundle?.getParcelable<PersonalDetails>("Personal Details")
+
+        val schoolArray  = Array(5){School("BMSCE","BE", "Bengaluru", "Computer Science and Engineering")}
+        val ProjectArray  = Array(3){ Projects("Resume Maker", "An android application to create a simple resume", "Written in Kotlin")}
+
 
         val htmlContent = StringBuilder()
         htmlContent.append(String.format("<!DOCTYPE html>\n" +
@@ -70,48 +75,97 @@ private lateinit var binding: FragmentPreviewBinding
                 "                        <p class=\"c0\"><span class=\"c10 c8\">%s</span></p>\n" +
                 "                        <p class=\"c6\"><span class=\"c8 c10\">%s</span></p>\n" +
                 "                    </td>\n" +
-                "                </tr>", personalDetails?.name, personalDetails?.jobTitle, personalDetails?.email, personalDetails?.phoneNumber, personalDetails?.website, personalDetails?.linkedInUrl, personalDetails?.linkedInUrl));
-
-        //binding.webview.loadDataWithBaseURL(null, htmlContent.toString(), "text/html", "utf-8", null);
-
-       /* binding.webview.settings.allowFileAccess = true
-        binding.webview.settings.allowContentAccess = true
+                "                </tr>", "Nikitha BM", "Android Developer", "NRI Layout", "Bengaluru", "+919964294700", "nikithabagalkoti@gmail.com", "www.n.com"))
 
 
+        htmlContent.append(String.format("\n" +
+                "                <tr class=\"c27\">\n" +
+                "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
+                "                        <p class=\"c6\"><span class=\"c24\">ㅡ</span></p>\n" +
+                "                        <h1 class=\"c9\" id=\"h.61e3cm1p1fln\"><span class=\"c16\">"+"Skills"+"</span></h1></td>\n" +
+                "                    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n" +
+                "                        <p class=\"c2\"><span style=\"overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 418.00px; height: 2.67px;\"><img alt=\"\" src=\"https://lh3.googleusercontent.com/n8bZfGajkthDbPpbjeiRJ4w7rNUmj1iFxdZKCHUOVnfH9FgHVt5EBo3vOYIIoE3augYQ_DCZJUzdlStyJ5RaldVrSG36sTE0CjIot2qaiJ3YRyr2i87bt9Y9d0ngdseS9PpG0HzM\" style=\"width: 418.00px; height: 2.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);\" title=\"horizontal line\"></span></p>\n" +
+                "                        <p class=\"c3\"><span class=\"c7\">%s</span></p>\n" +
+                "                    </td>\n" +
+                "                </tr>", "Python, Java, Android"))
 
-        val assetLoader = WebViewAssetLoader.Builder()
-            .addPathHandler("/assets/", WebViewAssetLoader.AssetsPathHandler(requireContext()))
-            .build()
+        htmlContent.append(String.format("\n" +
+                "                <tr class=\"c27\">\n" +
+                "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
+                "                        <p class=\"c6\"><span class=\"c24\">ㅡ</span></p>\n" +
+                "                        <h1 class=\"c9\" id=\"h.61e3cm1p1fln\"><span class=\"c16\">"+"Languages"+"</span></h1></td>\n" +
+                "                    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n" +
+                "                        <p class=\"c2\"><span style=\"overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 418.00px; height: 2.67px;\"><img alt=\"\" src=\"https://lh3.googleusercontent.com/n8bZfGajkthDbPpbjeiRJ4w7rNUmj1iFxdZKCHUOVnfH9FgHVt5EBo3vOYIIoE3augYQ_DCZJUzdlStyJ5RaldVrSG36sTE0CjIot2qaiJ3YRyr2i87bt9Y9d0ngdseS9PpG0HzM\" style=\"width: 418.00px; height: 2.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);\" title=\"horizontal line\"></span></p>\n" +
+                "                        <p class=\"c3\"><span class=\"c7\">%s</span></p>\n" +
+                "                    </td>\n" +
+                "                </tr>", "English, Hindi, Marathi"))
 
-        binding.webview.webViewClient = LocalContentWebViewClient(assetLoader)
+        htmlContent.append("\n" +
+                "                <tr class=\"c15\">\n" +
+                "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
+                "                        <p class=\"c6\"><span class=\"c24\">ㅡ</span></p>\n" +
+                "                        <h1 class=\"c9\" id=\"h.tk538brb1kdf\"><span class=\"c16\">"+"Education"+"</span></h1></td>\n" +
+                "                    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n");
 
+        var first = true
+        for (school: School in schoolArray) {
+            htmlContent.append(String.format("<h2 class=\"%s\" id=\"h.u3uy0857ab2n\"><span class=\"c5\">%s </span><span class=\"c30 c5\">/ %s</span></h2>\n" +
+                            "                        <h3 class=\"c2\" id=\"h.re1qtuma0rpm\"><span class=\"c1\">%s</span></h3>\n" +
+                            "                        <p class=\"c32\"><span class=\"c7\">%s</span></p>\n",
+                    if (first) "c3" else "c14", school.SchoolName, school.degree, school.location, school.description))
+            first = false
+        }
+        htmlContent.append(
+            "</td>\n" +
+                    "                </tr>"
+        )
 
-        binding.webview.settings.loadWithOverviewMode = true
-        binding.webview.settings.useWideViewPort = true
-        binding.webview.settings.builtInZoomControls = true
-*/
-        binding.webview.settings.allowFileAccess = true
-        binding.webview.loadUrl("file:///android_asset/BlueandBrickRedGeometricModernResume.html")
+        htmlContent.append("\n" +
+                "                <tr class=\"c15\">\n" +
+                "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
+                "                        <p class=\"c6\"><span class=\"c24\">ㅡ</span></p>\n" +
+                "                        <h1 class=\"c9\" id=\"h.tk538brb1kdf\"><span class=\"c16\">"+"Projects"+"</span></h1></td>\n" +
+                "                    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n");
 
-        //binding.webview.loadUrl("https://docs.google.com/document/d/1ES82n6BErLwVNdH-ntBQgjw8XgHNA5de/edit")
-    }
+        first = true
+        for (project in ProjectArray) {
+            htmlContent.append(
+                java.lang.String.format(
+                    """<h2 class="%s" id="h.u3uy0857ab2n"><span class="c5">%s </span><span class="c30 c5">/ %s</span></h2>
+                        <p class="c32"><span class="c7">%s</span></p>
+""", if (first) "c3" else "c14", project.name, project.detail, project.description
+                )
+            )
+            first = false
+        }
+        htmlContent.append(
+            """</td>
+                </tr>"""
+        )
+
+        htmlContent.append("</tbody>\n" +
+                "</table>\n" +
+                "<p class=\"c2 c11\"><span class=\"c30 c5\"></span></p>\n" +
+                "</div>\n" +
+                "</body>\n" +
+                "</html>");
+
+        binding.webview.loadDataWithBaseURL(null, htmlContent.toString(), "text/html", "utf-8", null);
+
+binding.btnPrint.setOnClickListener {
+    var printWeb = context?.let { WebView(it) }
+
+    // Creating  PrintManager instance
+    val printManager = context?.getSystemService(Context.PRINT_SERVICE) as PrintManager
+    val printAdapter: PrintDocumentAdapter = binding.webview.createPrintDocumentAdapter("Resume Preview")
+    printWeb = binding.webview
+
+    var printJob: PrintJob
+    printJob = printManager.print(
+        "Resume Preview", printAdapter,
+        PrintAttributes.Builder().build()
+    )
 }
 
-private class LocalContentWebViewClient(private val assetLoader: WebViewAssetLoader) : WebViewClientCompat() {
-    @RequiresApi(21)
-    override fun shouldInterceptRequest(
-        view: WebView,
-        request: WebResourceRequest
-    ): WebResourceResponse? {
-        return assetLoader.shouldInterceptRequest(request.url)
     }
-
-    // to support API < 21
-    override fun shouldInterceptRequest(
-        view: WebView,
-        url: String
-    ): WebResourceResponse? {
-        return assetLoader.shouldInterceptRequest(Uri.parse(url))
-    }
-
 }

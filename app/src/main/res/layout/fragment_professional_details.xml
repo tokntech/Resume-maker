@@ -13,57 +13,30 @@
         android:clipToPadding="false"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintBottom_toTopOf="@id/llButtons"
+        app:layout_constraintBottom_toTopOf="@id/llProfButtons"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/rlEduItems"
+        <RelativeLayout
+            android:id="@+id/rlProfItems"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etEduDetLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:hint="@string/education_1"
-                app:boxStrokeColor="#808080"
-                app:endIconDrawable="@drawable/blog_pic"
-                app:endIconMode="custom"
-                app:endIconTint="@null"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEduDet"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/edit_text_bg"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
-
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvEduDetails"
+                android:id="@+id/rvProfDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etEduDetLayout" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
-        android:id="@+id/llButtons"
+        android:id="@+id/llProfButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -71,7 +44,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/btnEduAdd"
+            android:id="@+id/btnProfAdd"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="165dp"
             android:layout_height="wrap_content"
@@ -84,7 +57,7 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/btnEduSave"
+            android:id="@+id/btnProfSave"
             android:layout_width="165dp"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"

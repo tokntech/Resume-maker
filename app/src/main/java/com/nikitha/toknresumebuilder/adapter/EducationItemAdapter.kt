@@ -15,7 +15,6 @@ import com.nikitha.toknresumebuilder.model.EducationDetails
 class EducationItemAdapter(private val educationDetails: ArrayList<EducationDetails>) : RecyclerView.Adapter<EducationItemAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private var tvEduString: TextView? = itemView.findViewById(R.id.tvEduNum)
         var etCourseName: EditText? = itemView.findViewById(R.id.etCourse)
         var etSchoolName: EditText? =  itemView.findViewById(R.id.etSchool)
         var etScore: EditText? =  itemView.findViewById(R.id.etScore)
@@ -24,10 +23,6 @@ class EducationItemAdapter(private val educationDetails: ArrayList<EducationDeta
 
         fun bind(position: Int)
         {
-            val index = position +1
-            tvEduString?.text = "Education $index"
-
-
 
             etCourseName?.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

@@ -1,15 +1,13 @@
 package com.nikitha.toknresumebuilder.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.ListFragment
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.adapter.RecyclerListAdapter
 import com.nikitha.toknresumebuilder.helper.OnStartDragListener
 import com.nikitha.toknresumebuilder.helper.SimpleItemTouchHelperCallback
