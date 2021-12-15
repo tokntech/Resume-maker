@@ -43,6 +43,8 @@
             android:layout_marginEnd="20dp"
             app:cardBackgroundColor="#F1F6FB"
             app:cardCornerRadius="5dp"
+            app:cardElevation="24dp"
+            app:cardMaxElevation="36dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etPerDetLayout">
@@ -202,9 +204,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:hint="@string/linkedin_url"
+                    app:endIconDrawable="@drawable/info"
                     app:endIconMode="custom"
                     app:endIconTint="@null"
-                    app:endIconDrawable="@drawable/info"
                     app:layout_constraintTop_toBottomOf="@+id/llEmailPhone">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -262,7 +264,7 @@
             <Button
                 android:id="@+id/btnSave"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_bg"

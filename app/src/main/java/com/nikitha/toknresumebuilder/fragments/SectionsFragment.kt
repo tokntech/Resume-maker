@@ -45,6 +45,7 @@ class SectionsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val colorDrawable = ColorDrawable(Color.TRANSPARENT)
+        activity?.title = "Sections"
         (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
         (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -69,11 +70,20 @@ class SectionsFragment : Fragment() {
             activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
         }
 
+        binding.tvProject.setOnClickListener {
+            val fragment = ProjectFragment()
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
+        }
+
         binding.tvRearrange.setOnClickListener {
             val fragment = RearrangeFragment()
             activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
         }
 
+        binding.tvSkills.setOnClickListener {
+            val fragment = SkillsFragment()
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
+        }
 
     }
 

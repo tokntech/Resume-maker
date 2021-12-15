@@ -23,8 +23,8 @@ class RecyclerListAdapter(val context: Context, dragStartListener: OnStartDragLi
     private val mDrawable: ArrayList<String> = ArrayList<String>()
     private var mDragStartListener: OnStartDragListener? = null
 
-    val drawable_array = arrayOf(R.drawable.person, R.drawable.education, R.drawable.profession_detail,
-    R.drawable.ic_twotone_shield_24, R.drawable.ic_baseline_flag_24, R.drawable.ic_baseline_sd_card_24, R.drawable.ic_baseline_add_circle_outline_24
+    val drawable_array = arrayOf(R.drawable.person, R.drawable.ic_education, R.drawable.ic_briefcase,
+    R.drawable.ic_shield, R.drawable.ic_objective, R.drawable.ic_file_text,  R.drawable.add_circle_big
     )
 
     init{

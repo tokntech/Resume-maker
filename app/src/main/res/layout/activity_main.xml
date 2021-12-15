@@ -38,7 +38,7 @@
             android:text="Education"
             android:textColor="#18191A"
             android:textSize="16sp"
-            app:drawableStartCompat="@drawable/education"
+            app:drawableStartCompat="@drawable/ic_education"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvPerSection" />

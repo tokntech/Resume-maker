@@ -38,7 +38,7 @@ private lateinit var binding: FragmentPreviewBinding
         super.onViewCreated(view, savedInstanceState)
         Toast.makeText(context, "preview fragment", Toast.LENGTH_SHORT).show()
 
-        val bundle = this.arguments
+        /*val bundle = this.arguments
         val personalDetails = bundle?.getParcelable<PersonalDetails>("Personal Details")
 
         val schoolArray  = Array(5){School("BMSCE","BE", "Bengaluru", "Computer Science and Engineering")}
@@ -164,8 +164,8 @@ binding.btnPrint.setOnClickListener {
     printJob = printManager.print(
         "Resume Preview", printAdapter,
         PrintAttributes.Builder().build()
-    )
-}
+    )*/
+//}
 
     }
 }

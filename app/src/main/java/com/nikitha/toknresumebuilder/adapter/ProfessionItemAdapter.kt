@@ -5,41 +5,39 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nikitha.toknresumebuilder.R
+import com.nikitha.toknresumebuilder.model.Designation
 import com.nikitha.toknresumebuilder.model.ProfessionalDetails
 
 class ProfessionItemAdapter(private val professionalDetails: ArrayList< ProfessionalDetails>) : RecyclerView.Adapter<ProfessionItemAdapter.ViewHolder>()
 {
+    private val viewPool = RecyclerView.RecycledViewPool()
+
+    private var designationItems: java.util.ArrayList<Designation> = java.util.ArrayList<Designation>()
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private var tvProfNum: TextView? = itemView.findViewById(R.id.tvProfNum)
-        var etProfile: EditText? = itemView.findViewById(R.id.etProfile)
-        var etOrganization: EditText? =  itemView.findViewById(R.id.etOrganization)
-        var etProfScore: EditText? =  itemView.findViewById(R.id.etProfScore)
-        var wfhCheckBox : CheckBox = itemView.findViewById(R.id.wfhCheckBox)
-        var etProfLocation: EditText? =  itemView.findViewById(R.id.etProfLocation)
-        var etProfStartYear: EditText? =  itemView.findViewById(R.id.etProfStartYear)
-        var etProfEndYear: EditText? =  itemView.findViewById(R.id.etProfEndYear)
-        var etJobDesc: EditText? = itemView.findViewById(R.id.etProfDesc)
+        var etCompany: EditText? = itemView.findViewById(R.id.etCompany)
+        var etLocation: EditText? =  itemView.findViewById(R.id.etLoc)
+        var etDesc: EditText? =  itemView.findViewById(R.id.etCompDesc)
+        var rvDesignation: RecyclerView? = itemView.findViewById(R.id.rvDesignation)
+        var tvAddDesignation : TextView? = itemView.findViewById(R.id.tvAddDesigSection)
+
 
         fun bind(position: Int)
         {
-            val index = position +1
-            tvProfNum?.text = "Experience $index"
-            wfhCheckBox.text = "Work from home"
-
-
-            etProfile?.addTextChangedListener(object : TextWatcher {
+            etCompany?.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    professionalDetails[position].profile = etProfile!!.text.toString()
+                    professionalDetails[position].comp_name = etCompany!!.text.toString()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
@@ -47,12 +45,12 @@ class ProfessionItemAdapter(private val professionalDetails: ArrayList< Professi
                 }
             })
 
-            etOrganization?.addTextChangedListener(object : TextWatcher {
+            etLocation?.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    professionalDetails.get(position).organization= etOrganization!!.text.toString()
+                    professionalDetails.get(position).work_location= etLocation!!.text.toString()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
@@ -60,64 +58,12 @@ class ProfessionItemAdapter(private val professionalDetails: ArrayList< Professi
                 }
             })
 
-            etProfScore?.addTextChangedListener(object : TextWatcher {
+            etDesc?.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    professionalDetails.get(position).grade = etProfScore!!.text.toString()
-                }
-
-                override fun afterTextChanged(p0: Editable?) {
-
-                }
-            })
-
-            etProfLocation?.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                }
-
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    professionalDetails.get(position).work_location = etProfLocation!!.text.toString()
-                }
-
-                override fun afterTextChanged(p0: Editable?) {
-
-                }
-            })
-
-            etProfStartYear?.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                }
-
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    professionalDetails.get(position).work_Startyear = etProfStartYear!!.text.toString()
-                }
-
-                override fun afterTextChanged(p0: Editable?) {
-
-                }
-            })
-
-            etProfEndYear?.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                }
-
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    professionalDetails.get(position).work_EndYear = etProfEndYear!!.text.toString()
-                }
-
-                override fun afterTextChanged(p0: Editable?) {
-
-                }
-            })
-
-            etJobDesc?.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                }
-
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    professionalDetails.get(position).job_description = etJobDesc!!.text.toString()
+                    professionalDetails.get(position).comp_description = etDesc!!.text.toString()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
@@ -126,6 +72,29 @@ class ProfessionItemAdapter(private val professionalDetails: ArrayList< Professi
             })
 
 
+            val designation = Designation("","","")
+            designationItems.add(designation)
+
+            val designationLayoutManager = LinearLayoutManager(rvDesignation?.context, RecyclerView.VERTICAL, false)
+            designationLayoutManager.initialPrefetchItemCount =1
+            rvDesignation?.apply {
+                layoutManager = designationLayoutManager
+                adapter = DesignationItemAdapter(designationItems)
+                setRecycledViewPool(viewPool)
+            }
+
+            tvAddDesignation?.setOnClickListener {
+                val designation_new = Designation("","","")
+                designationItems.add(designation_new)
+
+                val designationLayoutManager_new = LinearLayoutManager(rvDesignation?.context, RecyclerView.VERTICAL, false)
+                designationLayoutManager_new.initialPrefetchItemCount = designationItems.size
+                rvDesignation?.apply {
+                    layoutManager = designationLayoutManager_new
+                    adapter = DesignationItemAdapter(designationItems)
+                    setRecycledViewPool(viewPool)
+                }
+            }
 
         }
 
@@ -137,14 +106,11 @@ class ProfessionItemAdapter(private val professionalDetails: ArrayList< Professi
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.etProfile?.setText(professionalDetails[position].profile)
-        holder.etOrganization?.setText(professionalDetails[position].organization)
-        holder.etProfScore?.setText(professionalDetails[position].grade)
-        holder.wfhCheckBox.setText(professionalDetails[position].wfh)
-        holder.etProfLocation?.setText(professionalDetails[position].work_location)
-        holder.etProfStartYear?.setText(professionalDetails[position].work_Startyear)
-        holder.etProfEndYear?.setText(professionalDetails[position].work_EndYear)
-        holder.etJobDesc?.setText(professionalDetails[position].job_description)
+        holder.etCompany?.setText(professionalDetails[position].comp_name)
+        holder.etDesc?.setText(professionalDetails[position].comp_description)
+        holder.etLocation?.setText(professionalDetails[position].work_location)
+
+
 
         holder.bind(position)
     }

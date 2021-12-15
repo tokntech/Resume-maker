@@ -1,21 +1,29 @@
 package com.nikitha.toknresumebuilder.fragments
 
 import android.os.Bundle
+import android.text.style.AbsoluteSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.set
+import androidx.core.text.toSpannable
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nikitha.toknresumebuilder.R
+import com.nikitha.toknresumebuilder.adapter.DesignationItemAdapter
 import com.nikitha.toknresumebuilder.adapter.ProfessionItemAdapter
 import com.nikitha.toknresumebuilder.databinding.FragmentProfessionalDetailsBinding
+import com.nikitha.toknresumebuilder.model.Designation
 import com.nikitha.toknresumebuilder.model.ProfessionalDetails
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ProfessionalDetailsFragment : Fragment() {
 
 private lateinit var binding : FragmentProfessionalDetailsBinding
     private var professionalDetailsItems: ArrayList<ProfessionalDetails> = ArrayList<ProfessionalDetails>()
+    private var designationItems: ArrayList<Designation> = ArrayList<Designation>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,18 +39,29 @@ private lateinit var binding : FragmentProfessionalDetailsBinding
 
         activity?.title = "Professional Details"
 
-        val professionalDetails = ProfessionalDetails("", "", "", "", "", "", "", "")
+       val designation = arrayListOf(
+           Designation("","","")
+       )
+
+        val professionalDetails = ProfessionalDetails("", "", "",designation)
         professionalDetailsItems.add(professionalDetails)
+
+        designationItems.addAll(designation)
+
+        val btntext = ("Save \n& proceed").toSpannable()
+        btntext[5..15] = AbsoluteSizeSpan(10 , true)
+        binding.btnSave.text = btntext
 
 
         var adapter = ProfessionItemAdapter(professionalDetailsItems)
+
         binding.rvProfDetails.adapter = adapter
         binding.rvProfDetails.layoutManager = LinearLayoutManager(context)
         adapter.notifyDataSetChanged()
 
-        binding.btnProfAdd.setOnClickListener {
+        binding.tvAddProfSection.setOnClickListener {
 
-            var profDetails_new = ProfessionalDetails("", "", "", "", "", "", "", "")
+            var profDetails_new = ProfessionalDetails("", "", "", designation)
             professionalDetailsItems.add(profDetails_new)
 
             adapter = ProfessionItemAdapter(professionalDetailsItems)
@@ -50,5 +69,11 @@ private lateinit var binding : FragmentProfessionalDetailsBinding
             binding.rvProfDetails.layoutManager = LinearLayoutManager(context)
             adapter.notifyDataSetChanged()
         }
+
+        binding.btnSave.setOnClickListener{
+            val fragment = SkillsFragment()
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
+        }
+
     }
 }

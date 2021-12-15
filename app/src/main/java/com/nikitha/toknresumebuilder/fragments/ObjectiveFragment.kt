@@ -6,21 +6,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.nikitha.toknresumebuilder.R
+import com.nikitha.toknresumebuilder.databinding.FragmentObjectiveBinding
 
 class ObjectiveFragment : Fragment() {
 
+private lateinit var binding: FragmentObjectiveBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_objective, container, false)
+        binding = FragmentObjectiveBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "Objective"
+
+        binding.btnObjSave.setOnClickListener{
+            val fragment = ProjectFragment()
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
+        }
     }
 
 }

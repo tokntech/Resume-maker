@@ -5,7 +5,6 @@
     <string name="job_title">Job title</string>
     <string name="phone_number">Phone Number</string>
     <string name="linkedin_url">LinkedIn URL</string>
-    <string name="personal_website_optional">Personal Website (Optional)</string>
     <string name="email">Email</string>
     <string name="save">Save</string>
     <string name="profile_pic">Profile_Pic</string>
@@ -30,4 +29,9 @@
     <string name="save_amp_proceed"><![CDATA[Save & proceed]]></string>
     <string name="save_amp_n_proceed"><![CDATA[Save &\n proceed]]></string>
     <string name="previous">Previous</string>
+    <string name="name_of_the_company">Name of the company</string>
+    <string name="description_of_the_company_optional">Description of the company(optional)</string>
+    <string name="onboarding_picture">OnBoarding picture</string>
+    <string name="skills">Skills</string>
+
 </resources>

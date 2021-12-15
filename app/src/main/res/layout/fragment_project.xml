@@ -5,20 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toTopOf="@id/llButtons"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/rlEduItems"
+            android:id="@+id/clProjDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etEduDetLayout"
+                android:id="@+id/etProjectLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"
-                android:hint="@string/education_1"
+                android:hint="Project"
                 app:boxStrokeColor="#808080"
                 app:endIconDrawable="@drawable/blog_pic"
                 app:endIconMode="custom"
@@ -28,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEduDet"
+                    android:id="@+id/etProject"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="20dp"
@@ -39,16 +51,16 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvEduDetails"
+                android:id="@+id/rvProjDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etEduDetLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/etProjectLayout" />
 
             <TextView
-                android:id="@+id/tvAddEduSection"
+                android:id="@+id/tvAddProjSection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -58,9 +70,11 @@
                 app:drawableStartCompat="@drawable/add_circle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rvEduDetails" />
+                app:layout_constraintTop_toBottomOf="@id/rvProjDetails" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
 
     <LinearLayout
         android:id="@+id/llButtons"
@@ -69,7 +83,6 @@
         android:layout_marginBottom="10dp"
         android:baselineAligned="false"
         android:orientation="horizontal"
-        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -100,8 +113,7 @@
             app:cornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/personalDetailscard" />
+            app:layout_constraintStart_toStartOf="parent" />
     </LinearLayout>
 
 

@@ -11,9 +11,8 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.style.AbsoluteSizeSpan
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -24,9 +23,11 @@ import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.fragment.app.Fragment
 import com.nikitha.toknresumebuilder.R
+import com.nikitha.toknresumebuilder.commonactivities.MonthYearPickerDialog
 import com.nikitha.toknresumebuilder.databinding.FragmentPersonalDetailsBinding
 import com.nikitha.toknresumebuilder.model.PersonalDetails
 import java.io.File
+import kotlin.concurrent.fixedRateTimer
 
 
 class PersonalDetailsFragment : Fragment() {
@@ -84,26 +85,12 @@ class PersonalDetailsFragment : Fragment() {
                 customDialog.dismiss()
             }
             customDialog.show()
-
+            customDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         }
 
         binding.btnSave.setOnClickListener{
-            Toast.makeText(context, binding.etName.text, Toast.LENGTH_SHORT).show()
-
-            val personalDetails = PersonalDetails(  binding.etName.text.toString(),
-                binding.etTitle.text.toString(),
-                binding.etPhoneNum.text.toString(),
-                binding.etEmail.text.toString(),
-                binding.etAddress.text.toString(),
-                binding.etLinkedInUrl.text.toString())
-
-            val fragment = PreviewFragment()
-
-            val bundle = Bundle()
-            bundle.putParcelable("Personal Details", personalDetails)
-            fragment.arguments = bundle
-
+            val fragment = EducationDetailsFragment()
             activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
         }
 
@@ -123,6 +110,39 @@ class PersonalDetailsFragment : Fragment() {
                 binding.ivProfilePic.setImageURI(it.data?.data)
             }
         }
+
+
+        binding.tvAddSection.setOnClickListener {
+
+            val customDialog = Dialog(requireActivity())
+            customDialog.setContentView(R.layout.dialog_add_section)
+            // customDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            customDialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            val TextBtn = customDialog.findViewById(R.id.btnAddText) as Button
+            val LinkBtn = customDialog.findViewById(R.id.btnAddLink) as Button
+            TextBtn.setOnClickListener {
+                //Do something here
+                customDialog.dismiss()
+            }
+            LinkBtn.setOnClickListener {
+                customDialog.dismiss()
+            }
+            customDialog.show()
+            customDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        }
+
+        binding.btnPrevious.setOnClickListener {
+            var monthYearPickerDialog = MonthYearPickerDialog()
+            monthYearPickerDialog.apply {
+                setListener { _, year, month, dayOfMonth ->
+                    Toast.makeText(context, "Set date: $year/$month/$dayOfMonth", Toast.LENGTH_LONG).show()
+                }
+                show(this@PersonalDetailsFragment.childFragmentManager, "tag")
+            }
+        }
+
+
     }
 
     private fun showPictureDialog() {

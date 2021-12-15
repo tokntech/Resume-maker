@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/eduDetailscard"
+        android:id="@+id/designationCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        app:cardBackgroundColor="#F1F6FB"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="#D0E1F0"
         app:cardCornerRadius="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:cardElevation="24dp"
+        app:cardMaxElevation="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,27 +26,28 @@
             android:layout_marginBottom="10dp">
 
             <LinearLayout
-                android:id="@+id/llCourseLoc"
+                android:id="@+id/llDesigDur"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:baselineAligned="false"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/etSchoolLayout"
+                    android:id="@+id/etDesignationLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:hint="School/ University"
+                    android:hint="Designation"
                     app:endIconDrawable="@drawable/info"
                     app:endIconMode="custom"
                     app:endIconTint="@null">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etSchool"
+                        android:id="@+id/etDesignation"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
@@ -55,66 +56,11 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/etLocLayout"
+                    android:id="@+id/etProfDurLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_weight="2"
-                    android:hint="Location"
-                    app:endIconDrawable="@drawable/info"
-                    app:endIconMode="custom"
-                    app:endIconTint="@null"
-                    app:layout_constraintTop_toBottomOf="@+id/etSchoolLayout">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etLoc"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/edit_text_bg" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llCourseTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/llCourseLoc">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/etCourseLayout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:hint="Course"
-                    app:endIconDrawable="@drawable/info"
-                    app:endIconMode="custom"
-                    app:endIconTint="@null">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etCourse"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:background="@drawable/edit_text_bg" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/etDurLayout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:layout_weight="2"
                     android:hint="Duration"
                     app:endIconDrawable="@drawable/info"
@@ -123,7 +69,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/etSchoolLayout">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etDuration"
+                        android:id="@+id/etProfDuration"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
@@ -135,36 +81,30 @@
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etAchieveLayout"
+                android:id="@+id/etJobDescLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="2"
-                android:hint="* Key achievements"
-
+                android:hint="@string/job_description"
                 app:endIconDrawable="@drawable/info"
                 app:endIconMode="custom"
                 app:endIconTint="@null"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/llCourseTime">
+                app:layout_constraintTop_toBottomOf="@+id/llDesigDur">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etAchieve"
+                    android:id="@+id/etJobDesc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/edit_text_bg"
-                    android:inputType="textMultiLine"
                     android:minLines="3" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     </androidx.cardview.widget.CardView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

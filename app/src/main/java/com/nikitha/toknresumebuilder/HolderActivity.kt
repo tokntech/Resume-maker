@@ -16,6 +16,7 @@ class HolderActivity : AppCompatActivity()  {
         binding = ActivityHolderBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbar)
         title = "Sections"
 
     }
