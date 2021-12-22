@@ -29,8 +29,9 @@
         <item name="cornerSize">50%</item>
     </style>
 
-    <style name="TextAppearance.AppCompat.Widget.ActionBar.Title." parent="@android:style/TextAppearance">
+    <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@android:style/TextAppearance">
         <item name="android:textColor">#2D3748</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -45,7 +46,10 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="Theme.ToknResumeBuilder.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
+    <style name="Theme.ToknResumeBuilder.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
     <style name="spinner_style">
         <item name="android:layout_width">match_parent</item>

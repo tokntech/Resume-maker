@@ -15,4 +15,8 @@
     <color name="start_color">#005EA3</color>
     <color name="end_color">#11A8FD</color>
 
+    <color name="bottom_navbar_color">#FFFFFF</color>
+    <color name="background_color">#C0C0C0</color>
+
+    <color name="window_background_color">#FFFFFF</color>
 </resources>

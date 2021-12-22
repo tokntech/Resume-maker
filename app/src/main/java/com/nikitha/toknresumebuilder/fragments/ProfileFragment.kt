@@ -1,10 +1,12 @@
 package com.nikitha.toknresumebuilder.fragments
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.databinding.FragmentProfileBinding
 
 
@@ -21,4 +23,13 @@ class ProfileFragment : Fragment() {
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val colorDrawable = ColorDrawable(Color.TRANSPARENT)
+        (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
+        (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as? AppCompatActivity)?.supportActionBar?.setHomeButtonEnabled(true)
+    }
 }

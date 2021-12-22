@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.databinding.FragmentSectionsBinding
 
@@ -51,38 +52,31 @@ class SectionsFragment : Fragment() {
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.tvPerSection.setOnClickListener {
-            val fragment = PersonalDetailsFragment()
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
+            NavHostFragment.findNavController(this).navigate(R.id.action_sectionsFragment_to_personalDetailsFragment)
         }
 
         binding.tvEduSection.setOnClickListener {
-            val fragment = EducationDetailsFragment()
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
+            NavHostFragment.findNavController(this).navigate(R.id.action_sectionsFragment_to_educationDetailsFragment)
         }
 
         binding.tvProfDetails.setOnClickListener {
-            val fragment = ProfessionalDetailsFragment()
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
+            NavHostFragment.findNavController(this).navigate(R.id.action_sectionsFragment_to_professionalDetailsFragment)
         }
 
         binding.tvObjective.setOnClickListener {
-            val fragment = ObjectiveFragment()
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
+            NavHostFragment.findNavController(this).navigate(R.id.action_sectionsFragment_to_objectiveFragment)
         }
 
         binding.tvProject.setOnClickListener {
-            val fragment = ProjectFragment()
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
+            NavHostFragment.findNavController(this).navigate(R.id.action_sectionsFragment_to_projectFragment)
         }
 
         binding.tvRearrange.setOnClickListener {
-            val fragment = RearrangeFragment()
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
+            NavHostFragment.findNavController(this).navigate(R.id.action_sectionsFragment_to_rearrangeFragment)
         }
 
         binding.tvSkills.setOnClickListener {
-            val fragment = SkillsFragment()
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
+            NavHostFragment.findNavController(this).navigate(R.id.action_sectionsFragment_to_skillsFragment)
         }
 
     }

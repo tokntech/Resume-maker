@@ -7,7 +7,6 @@
     <string name="linkedin_url">LinkedIn URL (optional)</string>
     <string name="home_address_optional">Home Address (Optional)</string>
     <string name="email">Email id</string>
-    <string name="save">Save</string>
     <string name="profile_pic">Profile_Pic</string>
     <string name="add">Add</string>
     <string name="education_1">Education</string>
@@ -37,6 +36,26 @@
     <string name="description_of_the_company_optional">Description of the company(optional)</string>
     <string name="onboarding_picture">OnBoarding picture</string>
     <string name="skills">Skills</string>
+    <string name="options">options</string>
+    <string name="save">Save</string>
+    <string name="text">text</string>
+    <string name="change_font">Change font</string>
+    <string name="change_colour">Change colour</string>
+    <string name="change_template">Change Template</string>
+    <string name="sync_with_google_drive_other_drives">Sync with google drive /other drives</string>
+    <string name="feedback">Feedback</string>
+    <string name="share_app">Share app</string>
+    <string name="rate_app">Rate app</string>
+    <string name="trending_topics">Trending topics</string>
+    <string name="resume_preview">Resume preview</string>
+    <string name="my_resume_1">My Resume 1</string>
+    <string name="edit_resume">Edit resume</string>
+    <string name="download_resume">Download Resume</string>
+    <string name="share_resume">Share resume</string>
+    <string name="preview_resume">Preview resume</string>
+    <string name="add_a_new_resume">Add a new resume</string>
+    <string name="add_a_new_cover_letter">Add a new cover letter</string>
+    <string name="other_templates">Other templates</string>
 
     <array name="re_arrange_sections">
         <item>Personal Details</item>

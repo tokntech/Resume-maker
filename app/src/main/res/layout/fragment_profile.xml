@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="20dp">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/tvGDrive"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/edit_text_bg"
         android:drawablePadding="10dp"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
-        android:text="Sync with google drive /other drives"
+        android:text="@string/sync_with_google_drive_other_drives"
         android:textColor="#18191A"
         android:textSize="16sp"
         app:drawableStartCompat="@drawable/ic_baseline_sync_24"
@@ -27,51 +27,58 @@
         android:id="@+id/tvFeedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/edit_text_bg"
         android:drawablePadding="10dp"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
-        android:text="Feedback"
+        android:text="@string/feedback"
         android:textColor="#18191A"
         android:textSize="16sp"
         app:drawableStartCompat="@drawable/ic_baseline_message_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvGDrive"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGDrive" />
 
     <TextView
         android:id="@+id/tvShareApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/edit_text_bg"
         android:drawablePadding="10dp"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
-        android:text="Share app"
+        android:text="@string/share_app"
         android:textColor="#18191A"
         android:textSize="16sp"
         app:drawableStartCompat="@drawable/ic_baseline_share_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvFeedback"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFeedback" />
 
     <TextView
         android:id="@+id/tvRateApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/edit_text_bg"
         android:drawablePadding="10dp"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
-        android:text="Rate app"
+        android:text="@string/rate_app"
         android:textColor="#18191A"
         android:textSize="16sp"
         app:drawableStartCompat="@drawable/ic_baseline_star_outline_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvShareApp"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvShareApp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

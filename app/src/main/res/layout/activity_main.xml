@@ -1,161 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.nikitha.toknresumebuilder.MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:background="@color/white"
+        android:theme="@style/Theme.ToknResumeBuilder.AppBarOverlay"
+        app:elevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvPerSection"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/edit_text_bg"
-            android:drawablePadding="10dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:text="@string/personal_details"
-            android:textColor="#18191A"
-            android:textSize="16sp"
-            app:drawableStartCompat="@drawable/person"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:title="Sections"
+            app:popupTheme="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            app:titleTextColor="#2D3748" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <TextView
-            android:id="@+id/tvEduSection"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edit_text_bg"
-            android:drawablePadding="10dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:text="Education"
-            android:textColor="#18191A"
-            android:textSize="16sp"
-            app:drawableStartCompat="@drawable/ic_education"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPerSection" />
 
-        <TextView
-            android:id="@+id/tvProfDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edit_text_bg"
-            android:drawablePadding="10dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:text="Professional Details"
-            android:textColor="#18191A"
-            android:textSize="16sp"
-            app:drawableStartCompat="@drawable/profession_detail"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvEduSection" />
+    <fragment
+        android:id="@+id/nav_host_fragment_content_main"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/nav_view"
+        android:layout_below="@id/appbar_layout"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/main_graph" />
 
-        <TextView
-            android:id="@+id/tvSkills"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edit_text_bg"
-            android:drawablePadding="10dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:text="Skills"
-            android:textColor="#18191A"
-            android:textSize="16sp"
-            app:drawableStartCompat="@drawable/ic_twotone_shield_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvProfDetails" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/gradient_bottom_sheet"
+        android:backgroundTint="@color/bottom_navbar_color"
+        android:visibility="gone"
+        app:backgroundTint="@color/bottom_navbar_color"
+        app:itemIconTint="@drawable/bottom_nav_selector"
+        app:itemTextColor="@drawable/bottom_nav_selector"
+        app:labelVisibilityMode="labeled" />
 
-        <TextView
-            android:id="@+id/tvObjective"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edit_text_bg"
-            android:drawablePadding="10dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:text="Objective"
-            android:textColor="#18191A"
-            android:textSize="16sp"
-            app:drawableStartCompat="@drawable/ic_baseline_flag_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSkills" />
+    <np.com.susanthapa.curved_bottom_navigation.CurvedBottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:cbn_bg="@color/bottom_navbar_color"
+        app:cbn_fabBg="@color/background_color" />
 
-        <TextView
-            android:id="@+id/tvProject"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edit_text_bg"
-            android:drawablePadding="10dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:text="Project"
-            android:textColor="#18191A"
-            android:textSize="16sp"
-            app:drawableStartCompat="@drawable/ic_baseline_sd_card_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvObjective" />
 
-        <TextView
-            android:id="@+id/tvAddMore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edit_text_bg"
-            android:drawablePadding="10dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:text="Add more sections"
-            android:textColor="#18191A"
-            android:textSize="16sp"
-            app:drawableStartCompat="@drawable/ic_baseline_add_circle_outline_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvProject" />
-
-        <TextView
-            android:id="@+id/tvManageSec"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Manage Sections"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvAddMore" />
-
-        <TextView
-            android:id="@+id/tvRearrange"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/edit_text_bg"
-            android:drawablePadding="10dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:text="Rearrange sections"
-            android:textColor="#18191A"
-            android:textSize="16sp"
-            app:drawableStartCompat="@drawable/ic_baseline_view_headline_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvManageSec" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</RelativeLayout>

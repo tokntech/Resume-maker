@@ -1,14 +1,19 @@
 package com.nikitha.toknresumebuilder.fragments
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.style.AbsoluteSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.adapter.ProjectItemAdapter
 import com.nikitha.toknresumebuilder.databinding.FragmentProjectBinding
 import com.nikitha.toknresumebuilder.model.Projects
@@ -34,7 +39,11 @@ class ProjectFragment : Fragment() {
         btntext[5..15] = AbsoluteSizeSpan(10 , true)
         binding.btnSave.text = btntext
 
-        activity?.title = "Projects"
+        activity?.title = "Sections"
+
+        val colorDrawable = ColorDrawable(Color.TRANSPARENT)
+        (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
+        (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
 
         val projectItem = Projects("","","","")
         projectsList.add(projectItem)
@@ -54,6 +63,10 @@ class ProjectFragment : Fragment() {
             binding.rvProjDetails.adapter = adapter
             binding.rvProjDetails.layoutManager = LinearLayoutManager(context)
             adapter.notifyDataSetChanged()
+        }
+
+        binding.btnSave.setOnClickListener {
+            NavHostFragment.findNavController(this).navigate(R.id.action_projectFragment_to_saveFragment)
         }
 
     }

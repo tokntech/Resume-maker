@@ -1,0 +1,46 @@
+package com.nikitha.toknresumebuilder.fragments
+
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.nikitha.toknresumebuilder.R
+import com.nikitha.toknresumebuilder.adapter.TemplateAdapter
+import com.nikitha.toknresumebuilder.databinding.FragmentTemplateBinding
+import com.nikitha.toknresumebuilder.model.TemplateImages
+
+class TemplateFragment : Fragment() {
+private lateinit var binding: FragmentTemplateBinding
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        // Inflate the layout for this fragment
+        binding = FragmentTemplateBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val colorDrawable = ColorDrawable(Color.TRANSPARENT)
+        (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
+        (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
+
+        val templateImages = TemplateImages(R.drawable.ic_rectangle)
+        val adapter = TemplateAdapter(templateImages)
+        binding.rvTemplateImages.adapter = adapter
+        binding.rvTemplateImages.layoutManager = LinearLayoutManager(activity)
+        adapter.notifyDataSetChanged()
+
+        binding.btnNext.setOnClickListener {
+            NavHostFragment.findNavController(this).navigate(R.id.action_templateFragment_to_sectionsFragment)
+        }
+    }
+}

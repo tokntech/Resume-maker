@@ -1,13 +1,17 @@
 package com.nikitha.toknresumebuilder.fragments
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.style.AbsoluteSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.adapter.EducationItemAdapter
@@ -31,7 +35,10 @@ class EducationDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.title = "Education"
+        activity?.title = "Sections"
+        val colorDrawable = ColorDrawable(Color.TRANSPARENT)
+        (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
+        (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
 
         val educationDetails = EducationDetails("", "", "", "", "" )
         academicDetailsItems.add(educationDetails)
@@ -52,14 +59,17 @@ class EducationDetailsFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }
 
-        binding.btnSave.setOnClickListener{
-            val fragment = ProfessionalDetailsFragment()
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
-        }
+/*//        binding.btnSave.setOnClickListener{
+//            //NavHostFragment.findNavController(this).navigate(R.id.action_educationDetailsFragment_to_professionalDetailsFragment)
+//        }
+//
+//        binding.btnPrevious.setOnClickListener {
+//            //NavHostFragment.findNavController(this).navigate(R.id.action_educationDetailsFragment_to_sectionsFragment2)
+//        }
 
         val btntext = ("Save \n& proceed").toSpannable()
         btntext[5..15] = AbsoluteSizeSpan(10 , true)
-        binding.btnSave.text = btntext
+        binding.btnSave.text = btntext*/
     }
 
 

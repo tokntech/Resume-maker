@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/homeFragment2">
+
+    <fragment
+        android:id="@+id/homeFragment2"
+        android:name="com.nikitha.toknresumebuilder.fragments.HomeFragment"
+        android:label="Welcome"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="com.nikitha.toknresumebuilder.fragments.ProfileFragment"
+        android:label="Profile" />
+    <fragment
+        android:id="@+id/tutorialFragment2"
+        android:name="com.nikitha.toknresumebuilder.fragments.TutorialFragment"
+        android:label="Tutorial"
+        tools:layout="@layout/fragment_tutorial" />
+</navigation>

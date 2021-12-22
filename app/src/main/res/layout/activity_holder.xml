@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -21,16 +19,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@color/white"
-                    app:popupTheme="@style/Theme.ToknResumeBuilder.PopupOverlay"
+                    app:title="Sections"
+                    app:popupTheme="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                     app:titleTextColor="#2D3748" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView"
-            android:name="com.nikitha.toknresumebuilder.fragments.SectionsFragment"
+        <fragment
+            android:id="@+id/nav_host_fragment_holder"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/appbar_layout" />
+            android:layout_below="@id/appbar_layout"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/sections_graph" />
 </RelativeLayout>
 
 

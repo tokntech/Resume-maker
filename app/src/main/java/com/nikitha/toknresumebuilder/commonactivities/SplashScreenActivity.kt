@@ -1,7 +1,6 @@
 package com.nikitha.toknresumebuilder.commonactivities
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +9,7 @@ import android.os.Looper
 import android.view.WindowInsets
 import android.view.WindowManager
 import com.nikitha.toknresumebuilder.HolderActivity
+import com.nikitha.toknresumebuilder.MainActivity
 import com.nikitha.toknresumebuilder.OnBoardingActivity
 import com.nikitha.toknresumebuilder.databinding.ActivitySplashScreenBinding
 
@@ -46,7 +46,7 @@ class SplashScreenActivity : AppCompatActivity() {
             }
             else
             {
-                val intent = Intent(this, HolderActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             }

@@ -2,16 +2,11 @@ package com.nikitha.toknresumebuilder
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
-import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
-import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.nikitha.toknresumebuilder.databinding.ActivityOnBoardingBinding
 import java.util.ArrayList
 import kotlin.math.roundToInt

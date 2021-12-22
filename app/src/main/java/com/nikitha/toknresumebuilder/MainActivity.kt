@@ -1,6 +1,8 @@
 package com.nikitha.toknresumebuilder
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,14 +18,20 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import androidx.annotation.RequiresApi
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewClientCompat
+import np.com.susanthapa.curved_bottom_navigation.CbnMenuItem
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var appBarConfiguration: AppBarConfiguration? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,41 +39,33 @@ class MainActivity : AppCompatActivity() {
         binding  = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-        setTitle("Sections")
 
         //Displays the back arrow button
+        val colorDrawable = ColorDrawable(Color.TRANSPARENT)
+        supportActionBar?.setBackgroundDrawable(colorDrawable)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+        title = "Welcome"
+        setSupportActionBar(binding.toolbar)
 
-       binding.tvPerSection.setOnClickListener {
-           val intent = Intent(this, HolderActivity::class.java)
-           startActivity(intent)
-       }
+        val menuItems = arrayOf(
+            CbnMenuItem(R.drawable.ic_tutorial, R.drawable.avd_blog, R.id.tutorialFragment2),
+            CbnMenuItem(R.drawable.ic_home, R.drawable.avd_home, R.id.homeFragment2),
+            CbnMenuItem(R.drawable.ic_profile, R.drawable.avd_person, R.id.profileFragment2),
+        )
+        binding.navView.setMenuItems(menuItems, 1)
+
+
+        val navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main)
+        appBarConfiguration = AppBarConfiguration.Builder(R.id.homeFragment2).build()
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration!!)
+        binding.navView.setupWithNavController(navController)
 
     }
 
-    //For the back arrow to work
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
+        val navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main)
+        return NavigationUI.navigateUp(navController, appBarConfiguration!!) || super.onSupportNavigateUp()
     }
-
-    //For the view resume menu option
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.options, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    //Handle the menu click
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-       when(item.itemId)
-       {
-           R.id.view_icon -> Toast.makeText(this, "View resume clicked", Toast.LENGTH_SHORT).show()
-       }
-
-        return super.onOptionsItemSelected(item)
-    }
-
-
-
 
 }

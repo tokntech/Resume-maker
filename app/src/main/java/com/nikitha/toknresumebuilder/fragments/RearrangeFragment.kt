@@ -1,13 +1,17 @@
 package com.nikitha.toknresumebuilder.fragments
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.adapter.RecyclerListAdapter
 import com.nikitha.toknresumebuilder.helper.OnStartDragListener
 import com.nikitha.toknresumebuilder.helper.SimpleItemTouchHelperCallback
@@ -26,7 +30,10 @@ class RearrangeFragment : Fragment(), OnStartDragListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.title = "Rearrange sections"
+
+        val colorDrawable = ColorDrawable(Color.TRANSPARENT)
+        (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
+        (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
 
         val adapter = context?.let { RecyclerListAdapter(it, this) }
 

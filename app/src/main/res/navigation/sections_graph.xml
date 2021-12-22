@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sections_graph"
+    app:startDestination="@id/templateFragment">
+
+    <fragment
+        android:id="@+id/sectionsFragment"
+
+        android:name="com.nikitha.toknresumebuilder.fragments.SectionsFragment"
+        android:label="Sections" >
+        <action
+            android:id="@+id/action_sectionsFragment_to_personalDetailsFragment"
+            app:destination="@id/personalDetailsFragment" />
+        <action
+            android:id="@+id/action_sectionsFragment_to_educationDetailsFragment"
+            app:destination="@id/educationDetailsFragment" />
+        <action
+            android:id="@+id/action_sectionsFragment_to_professionalDetailsFragment"
+            app:destination="@id/professionalDetailsFragment" />
+        <action
+            android:id="@+id/action_sectionsFragment_to_projectFragment"
+            app:destination="@id/projectFragment" />
+        <action
+            android:id="@+id/action_sectionsFragment_to_objectiveFragment"
+            app:destination="@id/objectiveFragment" />
+        <action
+            android:id="@+id/action_sectionsFragment_to_skillsFragment"
+            app:destination="@id/skillsFragment" />
+        <action
+            android:id="@+id/action_sectionsFragment_to_rearrangeFragment"
+            app:destination="@id/rearrangeFragment" />
+        <action
+            android:id="@+id/action_sectionsFragment_to_previewFragment"
+            app:destination="@id/previewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalDetailsFragment"
+        android:name="com.nikitha.toknresumebuilder.fragments.PersonalDetailsFragment"
+        android:label="Sections" />
+    <fragment
+        android:id="@+id/educationDetailsFragment"
+        android:name="com.nikitha.toknresumebuilder.fragments.EducationDetailsFragment"
+        android:label="Sections" />
+    <fragment
+        android:id="@+id/professionalDetailsFragment"
+        android:name="com.nikitha.toknresumebuilder.fragments.ProfessionalDetailsFragment"
+        android:label="Sections" />
+    <fragment
+        android:id="@+id/projectFragment"
+        android:name="com.nikitha.toknresumebuilder.fragments.ProjectFragment"
+        android:label="Sections" >
+        <action
+            android:id="@+id/action_projectFragment_to_saveFragment"
+            app:destination="@id/saveFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/objectiveFragment"
+        android:name="com.nikitha.toknresumebuilder.fragments.ObjectiveFragment"
+        android:label="Sections" />
+    <fragment
+        android:id="@+id/skillsFragment"
+        android:name="com.nikitha.toknresumebuilder.fragments.SkillsFragment"
+        android:label="Sections"
+        tools:layout="@layout/fragment_skills" />
+    <fragment
+        android:id="@+id/rearrangeFragment"
+        android:name="com.nikitha.toknresumebuilder.fragments.RearrangeFragment"
+        android:label="Rearrange sections" />
+    <fragment
+        android:id="@+id/previewFragment"
+        android:name="com.nikitha.toknresumebuilder.fragments.PreviewFragment"
+        android:label="fragment_preview"
+        tools:layout="@layout/fragment_preview" />
+    <fragment
+        android:id="@+id/templateFragment"
+        android:name="com.nikitha.toknresumebuilder.fragments.TemplateFragment"
+        android:label="Choose your template" >
+        <action
+            android:id="@+id/action_templateFragment_to_sectionsFragment"
+            app:destination="@id/sectionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saveFragment"
+        android:name="com.nikitha.toknresumebuilder.fragments.SaveFragment"
+        android:label="Resume"
+        tools:layout="@layout/fragment_save" />
+</navigation>

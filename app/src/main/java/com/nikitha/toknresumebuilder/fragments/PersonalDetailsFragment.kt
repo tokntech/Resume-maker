@@ -22,6 +22,7 @@ import androidx.core.content.FileProvider
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.commonactivities.MonthYearPickerDialog
 import com.nikitha.toknresumebuilder.databinding.FragmentPersonalDetailsBinding
@@ -47,12 +48,12 @@ class PersonalDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activity?.title = "Back to sections"
+        activity?.title = "Sections"
 
         val colorDrawable = ColorDrawable(Color.TRANSPARENT)
         (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
         (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
-        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        //(activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
         val btntext = ("Save \n& proceed").toSpannable()
@@ -90,8 +91,7 @@ class PersonalDetailsFragment : Fragment() {
         }
 
         binding.btnSave.setOnClickListener{
-            val fragment = EducationDetailsFragment()
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
+           //NavHostFragment.findNavController(this).navigate(R.id.action_personalDetailsFragment_to_educationDetailsFragment)
         }
 
         resultLauncherCamera = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
@@ -133,13 +133,6 @@ class PersonalDetailsFragment : Fragment() {
         }
 
         binding.btnPrevious.setOnClickListener {
-            var monthYearPickerDialog = MonthYearPickerDialog()
-            monthYearPickerDialog.apply {
-                setListener { _, year, month, dayOfMonth ->
-                    Toast.makeText(context, "Set date: $year/$month/$dayOfMonth", Toast.LENGTH_LONG).show()
-                }
-                show(this@PersonalDetailsFragment.childFragmentManager, "tag")
-            }
         }
 
 

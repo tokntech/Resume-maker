@@ -1,10 +1,16 @@
 package com.nikitha.toknresumebuilder.fragments
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.style.AbsoluteSizeSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.set
+import androidx.core.text.toSpannable
 import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.databinding.FragmentObjectiveBinding
 
@@ -23,11 +29,17 @@ private lateinit var binding: FragmentObjectiveBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.title = "Objective"
+        activity?.title = "Sections"
 
-        binding.btnObjSave.setOnClickListener{
-            val fragment = ProjectFragment()
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
+        val colorDrawable = ColorDrawable(Color.TRANSPARENT)
+        (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
+        (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
+
+        val btntext = ("Save \n& proceed").toSpannable()
+        btntext[5..15] = AbsoluteSizeSpan(10 , true)
+        binding.btnSave.text = btntext
+
+        binding.btnSave.setOnClickListener{
         }
     }
 

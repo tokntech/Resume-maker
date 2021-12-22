@@ -11,10 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.EditText
-import android.widget.NumberPicker
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.contentValuesOf
 import androidx.recyclerview.widget.RecyclerView
 import com.nikitha.toknresumebuilder.R
@@ -32,10 +29,15 @@ class EducationItemAdapter(private val educationDetails: ArrayList<EducationDeta
         var etLocation:EditText? = itemView.findViewById(R.id.etLoc)
         var etDuration:EditText? = itemView.findViewById(R.id.etDuration)
         var keyachievements: EditText? = itemView.findViewById(R.id.etAchieve)
+        var ibOptions :ImageButton? = itemView.findViewById(R.id.ibOptions)
 
 
         fun bind(position: Int)
         {
+
+            ibOptions?.setOnClickListener{
+
+            }
 
             etCourseName?.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
