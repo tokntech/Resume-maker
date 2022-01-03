@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -42,5 +43,12 @@ private lateinit var binding: FragmentTemplateBinding
         binding.btnNext.setOnClickListener {
             NavHostFragment.findNavController(this).navigate(R.id.action_templateFragment_to_sectionsFragment)
         }
+        setHasOptionsMenu(true)
+    }
+
+    //Hide the preview and blogs button
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.clear()
     }
 }

@@ -8,6 +8,24 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:layout_marginBottom="10dp"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/llButtons"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clProfItems"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etEduDetLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -54,8 +72,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rvEduDetails" />
-
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
     <LinearLayout
         android:id="@+id/llButtons"
         android:layout_width="match_parent"

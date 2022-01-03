@@ -38,11 +38,23 @@
     <fragment
         android:id="@+id/personalDetailsFragment"
         android:name="com.nikitha.toknresumebuilder.fragments.PersonalDetailsFragment"
-        android:label="Sections" />
+        android:label="Sections" >
+        <action
+            android:id="@+id/action_personalDetailsFragment_to_educationDetailsFragment"
+            app:destination="@id/educationDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/educationDetailsFragment"
         android:name="com.nikitha.toknresumebuilder.fragments.EducationDetailsFragment"
-        android:label="Sections" />
+        android:label="Sections" >
+        <action
+            android:id="@+id/action_educationDetailsFragment_to_professionalDetailsFragment"
+            app:destination="@id/professionalDetailsFragment" />
+        <argument
+            android:name="resume_id"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
     <fragment
         android:id="@+id/professionalDetailsFragment"
         android:name="com.nikitha.toknresumebuilder.fragments.ProfessionalDetailsFragment"

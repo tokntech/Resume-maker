@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+
 }
 
 android {
@@ -21,6 +23,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
+
     buildTypes {
         release {
             minifyEnabled false
@@ -28,6 +32,7 @@ android {
         }
 
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -61,7 +66,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
 
     def room_version = "2.4.0"
-    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-runtime:2.4.0"
     annotationProcessor("androidx.room:room-compiler:$room_version")
 
     // To use Kotlin annotation processing tool (kapt)
@@ -82,5 +87,25 @@ dependencies {
 
     //bottom navigation bar
     implementation 'np.com.susanthapa:curved_bottom_navigation:0.6.5'
+
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
+
+    // Coroutine Lifecycle Scopes
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
+
+    // Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.4.0"
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.8'
+
+    implementation 'androidx.fragment:fragment-ktx:1.4.0-alpha04'
+    api 'androidx.navigation:navigation-fragment-ktx:2.4.0-alpha04'
+    api 'androidx.navigation:navigation-ui-ktx:2.4.0-alpha04'
+
+
+
 
 }

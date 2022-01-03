@@ -3,10 +3,7 @@ package com.nikitha.toknresumebuilder.fragments
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -47,6 +44,7 @@ class SectionsFragment : Fragment() {
 
         val colorDrawable = ColorDrawable(Color.TRANSPARENT)
         activity?.title = "Sections"
+
         (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
         (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -79,6 +77,12 @@ class SectionsFragment : Fragment() {
             NavHostFragment.findNavController(this).navigate(R.id.action_sectionsFragment_to_skillsFragment)
         }
 
+        setHasOptionsMenu(true)
+
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.clear()
+    }
 }

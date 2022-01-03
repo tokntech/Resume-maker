@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.style.AbsoluteSizeSpan
+import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.TextView
@@ -19,22 +20,31 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import androidx.core.os.bundleOf
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.textfield.TextInputEditText
+import com.nikitha.toknresumebuilder.viewmodel.ResumeViewModel
 import com.nikitha.toknresumebuilder.R
-import com.nikitha.toknresumebuilder.commonactivities.MonthYearPickerDialog
 import com.nikitha.toknresumebuilder.databinding.FragmentPersonalDetailsBinding
 import com.nikitha.toknresumebuilder.model.PersonalDetails
 import java.io.File
-import kotlin.concurrent.fixedRateTimer
 
 
 class PersonalDetailsFragment : Fragment() {
     private lateinit var binding: FragmentPersonalDetailsBinding
     private lateinit var resultLauncherCamera: ActivityResultLauncher<Intent>
     private lateinit var resultLauncherGallery: ActivityResultLauncher<Intent>
+    private lateinit var resumeViewModel : ResumeViewModel
+    private lateinit var personalDetails: PersonalDetails
+    private  var linkedInText : String =""
+    private  var linkedInUrl : String = ""
+    private var profilePicPath :String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +57,8 @@ class PersonalDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        resumeViewModel = ViewModelProvider(this)[ResumeViewModel::class.java]
 
         activity?.title = "Sections"
 
@@ -61,9 +73,7 @@ class PersonalDetailsFragment : Fragment() {
         binding.btnSave.text = btntext
 
         binding.ivProfilePic.setOnClickListener{
-
             showPictureDialog()
-
         }
 
 
@@ -76,10 +86,26 @@ class PersonalDetailsFragment : Fragment() {
             customDialog.setContentView(R.layout.dialog_linkedin_url)
            // customDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             customDialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            val yesBtn = customDialog.findViewById(R.id.textView) as TextView
-            val noBtn = customDialog.findViewById(R.id.tvOk) as TextView
+            val yesBtn = customDialog.findViewById(R.id.tvOk) as TextView
+            val noBtn = customDialog.findViewById(R.id.tvCancel) as TextView
+
             yesBtn.setOnClickListener {
-                //Do something here
+                linkedInText = customDialog.findViewById<TextInputEditText>(R.id.etLinkedInText).text.toString()
+                linkedInUrl = customDialog.findViewById<TextInputEditText>(R.id.etLinkedInUrl).text.toString()
+
+               /* if(linkedInText.isEmpty() || linkedInUrl.isEmpty() )
+                {
+                    customDialog.findViewById<EditText>(R.id.etLinkedInText).error = "Please enter the text to display"
+                    customDialog.findViewById<EditText>(R.id.etLinkedInUrl).error = "Please enter the URL to display"
+                }
+                else  {
+                    if(!(Patterns.WEB_URL.matcher(customDialog.findViewById<EditText>(R.id.etLinkedInUrl).text.toString().trim()).matches()))
+                        customDialog.findViewById<EditText>(R.id.etLinkedInUrl).error = "Invalid URL - Ex: www.demo.com"
+                    else {
+                        linkedInText = customDialog.findViewById<EditText>(R.id.etLinkedInText).toString()
+                        linkedInUrl = customDialog.findViewById<EditText>(R.id.etLinkedInUrl).toString()
+                    }
+                }*/
                 customDialog.dismiss()
             }
             noBtn.setOnClickListener {
@@ -91,7 +117,32 @@ class PersonalDetailsFragment : Fragment() {
         }
 
         binding.btnSave.setOnClickListener{
-           //NavHostFragment.findNavController(this).navigate(R.id.action_personalDetailsFragment_to_educationDetailsFragment)
+                personalDetails = PersonalDetails(0, binding.etName.text.toString(),
+                binding.etTitle.text.toString(), binding.etAddress.text.toString(),
+                binding.etPhoneNum.text.toString(), binding.etEmail.text.toString(),
+                "", linkedInText, linkedInUrl, "")
+
+
+                var resumeId = 0L
+          /* resumeViewModel.insertPersonalDetails(personalDetails).observe(this, Observer {
+                resumeId = it
+               val bundle = bundleOf("resumeId" to resumeId)
+
+               Log.d("PersonalDetailsFragment", "Inserted id is $resumeId")
+               NavHostFragment.findNavController(this).navigate(R.id.action_personalDetailsFragment_to_educationDetailsFragment, bundle)
+            })*/
+
+            resumeId = resumeViewModel.insertPersonalDetails(personalDetails)
+
+
+
+            //val bundle = bundleOf("resumeId" to resumeId)
+            val b = Bundle()
+            b.putLong("resumeId", resumeId)
+
+            Log.d("PersonalDetailsFragment", "Inserted id is $resumeId")
+            NavHostFragment.findNavController(this).navigate(R.id.action_personalDetailsFragment_to_educationDetailsFragment, b)
+
         }
 
         resultLauncherCamera = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
@@ -173,9 +224,10 @@ class PersonalDetailsFragment : Fragment() {
 
     private fun getPhotoFile(fileName: String): File {
         val directoryStorage = activity?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-
         return File.createTempFile(fileName, ".jpg", directoryStorage)
     }
 }
+
+
 private lateinit var filePhoto: File
 private const val FILE_NAME = "photo.jpg"

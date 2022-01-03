@@ -30,7 +30,7 @@ class SkillItemAdapter(private val skillsItem: ArrayList<Skill>, val selectedRat
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    skillsItem[position].skillName = etSkillName!!.text.toString()
+                    skillsItem[position].skill_name = etSkillName!!.text.toString()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
@@ -48,7 +48,7 @@ class SkillItemAdapter(private val skillsItem: ArrayList<Skill>, val selectedRat
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.etSkillName?.setText(skillsItem[position].skillName)
+        holder.etSkillName?.setText(skillsItem[position].skill_name)
 
         if(selectedRating == "star") {
             holder.ratingBar?.visibility = View.VISIBLE
@@ -61,8 +61,8 @@ class SkillItemAdapter(private val skillsItem: ArrayList<Skill>, val selectedRat
         }
         else
         {
-            holder.ratingBar?.visibility = View.INVISIBLE
-            holder.slider?.visibility = View.INVISIBLE
+            holder.ratingBar?.visibility = View.GONE
+            holder.slider?.visibility = View.GONE
         }
 
 

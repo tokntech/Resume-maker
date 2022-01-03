@@ -45,7 +45,7 @@ class ProjectFragment : Fragment() {
         (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
         (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
 
-        val projectItem = Projects("","","","")
+        val projectItem = Projects("","","","", "", 0)
         projectsList.add(projectItem)
 
 
@@ -56,7 +56,7 @@ class ProjectFragment : Fragment() {
 
         binding.tvAddProjSection.setOnClickListener {
 
-            val projectItem = Projects("","","","")
+            val projectItem = Projects("","","","", "", 0)
             projectsList.add(projectItem)
 
             adapter = ProjectItemAdapter(projectsList)

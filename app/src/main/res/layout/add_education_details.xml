@@ -12,6 +12,7 @@
         android:contentDescription="@string/options"
         android:src="@drawable/ic_options_1"
         android:translationZ="10dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/llCourseLoc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9999"

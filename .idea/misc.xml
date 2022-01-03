@@ -65,7 +65,7 @@
         <entry key="app/src/main/res/layout/fragment_objective.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_personal_details.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_preview.xml" value="0.18297101449275363" />
-        <entry key="app/src/main/res/layout/fragment_professional_details.xml" value="0.2956989247311828" />
+        <entry key="app/src/main/res/layout/fragment_professional_details.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_project.xml" value="0.18018018018018017" />
         <entry key="app/src/main/res/layout/fragment_rearrange.xml" value="0.375" />
@@ -75,6 +75,7 @@
         <entry key="app/src/main/res/layout/fragment_template.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_tutorial.xml" value="0.13353825136612021" />
         <entry key="app/src/main/res/layout/item_main.xml" value="0.12409420289855072" />
+        <entry key="app/src/main/res/layout/option_recycler_view.xml" value="0.335" />
         <entry key="app/src/main/res/layout/single_designation_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_education_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/single_professional_item.xml" value="0.2956989247311828" />

@@ -37,7 +37,7 @@ class ProfessionItemAdapter(private val professionalDetails: ArrayList< Professi
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    professionalDetails[position].comp_name = etCompany!!.text.toString()
+                    professionalDetails[position].company_name = etCompany!!.text.toString()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
@@ -50,7 +50,7 @@ class ProfessionItemAdapter(private val professionalDetails: ArrayList< Professi
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    professionalDetails.get(position).work_location= etLocation!!.text.toString()
+                    professionalDetails.get(position).location= etLocation!!.text.toString()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
@@ -63,7 +63,7 @@ class ProfessionItemAdapter(private val professionalDetails: ArrayList< Professi
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    professionalDetails.get(position).comp_description = etDesc!!.text.toString()
+                    professionalDetails.get(position).description = etDesc!!.text.toString()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
@@ -106,9 +106,9 @@ class ProfessionItemAdapter(private val professionalDetails: ArrayList< Professi
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.etCompany?.setText(professionalDetails[position].comp_name)
-        holder.etDesc?.setText(professionalDetails[position].comp_description)
-        holder.etLocation?.setText(professionalDetails[position].work_location)
+        holder.etCompany?.setText(professionalDetails[position].company_name)
+        holder.etDesc?.setText(professionalDetails[position].description)
+        holder.etLocation?.setText(professionalDetails[position].location)
 
 
 

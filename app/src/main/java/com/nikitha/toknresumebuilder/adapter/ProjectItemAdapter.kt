@@ -21,7 +21,7 @@ class ProjectItemAdapter(private val projectList: ArrayList<Projects>): Recycler
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    projectList[position].title = etProjectTitle.text.toString()
+                    projectList[position].project_title = etProjectTitle.text.toString()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
@@ -35,7 +35,7 @@ class ProjectItemAdapter(private val projectList: ArrayList<Projects>): Recycler
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    projectList[position].duration = etProjectDuration.text.toString()
+                    projectList[position].start_date = etProjectDuration.text.toString()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {

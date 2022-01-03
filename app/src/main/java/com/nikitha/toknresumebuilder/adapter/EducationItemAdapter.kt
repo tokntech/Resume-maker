@@ -2,26 +2,24 @@ package com.nikitha.toknresumebuilder.adapter
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.widget.*
-import androidx.core.content.contentValuesOf
+import androidx.annotation.RequiresApi
+import androidx.core.view.MenuCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.nikitha.toknresumebuilder.R
-import com.nikitha.toknresumebuilder.commonactivities.MonthYearPickerDialog
-import com.nikitha.toknresumebuilder.model.EducationDetails
+import com.nikitha.toknresumebuilder.model.EducationalDetails
 import java.util.*
-import kotlin.collections.ArrayList
 
 
-class EducationItemAdapter(private val educationDetails: ArrayList<EducationDetails>, private val activity: Activity?) : RecyclerView.Adapter<EducationItemAdapter.ViewHolder>() {
+class EducationItemAdapter(private val educationDetails: ArrayList<EducationalDetails>, private val activity: Activity?) : RecyclerView.Adapter<EducationItemAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var etCourseName: EditText? = itemView.findViewById(R.id.etCourse)
@@ -32,6 +30,7 @@ class EducationItemAdapter(private val educationDetails: ArrayList<EducationDeta
         var ibOptions :ImageButton? = itemView.findViewById(R.id.ibOptions)
 
 
+        @RequiresApi(Build.VERSION_CODES.Q)
         fun bind(position: Int)
         {
 
@@ -89,7 +88,7 @@ class EducationItemAdapter(private val educationDetails: ArrayList<EducationDeta
                     ViewDialog().apply {
                        dateSelected = showMonthYearDialog(activity)
                    }
-                    educationDetails.get(position).duration = dateSelected[0].toString()
+                    educationDetails.get(position).start_year = dateSelected[0].toString()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
@@ -102,7 +101,7 @@ class EducationItemAdapter(private val educationDetails: ArrayList<EducationDeta
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    educationDetails[position].keyAchievements = keyachievements!!.text.toString()
+                    educationDetails[position].key_achievements = keyachievements!!.text.toString()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
@@ -110,7 +109,19 @@ class EducationItemAdapter(private val educationDetails: ArrayList<EducationDeta
                 }
             })
 
+            if(educationDetails.size > 1 && position>0)
+            {
+                ibOptions?.visibility = View.VISIBLE
+            }
 
+            ibOptions?.setOnClickListener {
+                val popup = PopupMenu(activity, it)
+                val inflater = popup.menuInflater
+                popup.setForceShowIcon(true)
+                MenuCompat.setGroupDividerEnabled(popup.menu, true)
+                inflater.inflate(R.menu.options, popup.menu)
+                popup.show()
+            }
 
         }
 
@@ -121,12 +132,13 @@ class EducationItemAdapter(private val educationDetails: ArrayList<EducationDeta
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.etCourseName?.setText(educationDetails[position].course)
         holder.etSchoolName?.setText(educationDetails[position].school)
-        holder.etDuration?.setText(educationDetails[position].duration)
+        holder.etDuration?.setText(educationDetails[position].start_year)
         holder.etLocation?.setText(educationDetails[position].location)
-        holder.keyachievements?.setText(educationDetails[position].keyAchievements)
+        holder.keyachievements?.setText(educationDetails[position].key_achievements)
 
 
         holder.bind(position)
@@ -145,7 +157,7 @@ class ViewDialog {
         dialog.setCancelable(true)
         dialog.setContentView(R.layout.dialog_month_year_picker)
 
-        var dateSelected= intArrayOf(0,1,2,3)
+        val dateSelected= intArrayOf(0,1,2,3)
 
         val startMonthPicker = dialog.findViewById(R.id.picker_month) as NumberPicker
         val startYearPicker = dialog.findViewById(R.id.picker_year) as NumberPicker

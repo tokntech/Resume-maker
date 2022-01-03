@@ -26,7 +26,7 @@ class DesignationItemAdapter(private val designationDetails: ArrayList< Designat
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    designationDetails[position].designation_name = etDesignation!!.text.toString()
+                    designationDetails[position].designation = etDesignation!!.text.toString()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
@@ -39,7 +39,7 @@ class DesignationItemAdapter(private val designationDetails: ArrayList< Designat
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    designationDetails.get(position).duration= etDuration!!.text.toString()
+                    designationDetails.get(position).start_date= etDuration!!.text.toString()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
@@ -52,7 +52,7 @@ class DesignationItemAdapter(private val designationDetails: ArrayList< Designat
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    designationDetails.get(position).job_description = etJobDesc!!.text.toString()
+                    designationDetails.get(position).description = etJobDesc!!.text.toString()
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
@@ -71,9 +71,9 @@ class DesignationItemAdapter(private val designationDetails: ArrayList< Designat
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.etJobDesc?.setText(designationDetails[position].job_description)
-        holder.etDesignation?.setText(designationDetails[position].designation_name)
-        holder.etDuration?.setText(designationDetails[position].duration)
+        holder.etJobDesc?.setText(designationDetails[position].description)
+        holder.etDesignation?.setText(designationDetails[position].designation)
+        holder.etDuration?.setText(designationDetails[position].start_date)
 
         holder.bind(position)
     }

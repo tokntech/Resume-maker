@@ -25,7 +25,7 @@ class SkillsFragment : Fragment() {
     private lateinit var binding: FragmentSkillsBinding
 
     private var skillsList = ArrayList<Skill>()
-    private var ratingSelected ="star"
+    private var ratingSelected ="none"
     val spinner_item = arrayOf("No ratings", "Stars", "Progress bar")
 
     override fun onCreateView(
@@ -49,7 +49,7 @@ class SkillsFragment : Fragment() {
         (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
         (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
 
-        val skillsItem = Skill("")
+        val skillsItem = Skill("", "", 1, 0 )
         skillsList.add(skillsItem)
 
         var adapter = SkillItemAdapter(skillsList, "")
@@ -59,7 +59,7 @@ class SkillsFragment : Fragment() {
 
         binding.tvAddSkillSection.setOnClickListener {
 
-            val skills_new = Skill("")
+            val skills_new = Skill("", "", 1, 0)
             skillsList.add(skills_new)
 
             adapter = SkillItemAdapter(skillsList, ratingSelected )
@@ -73,16 +73,14 @@ class SkillsFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>,
                                         view: View, position: Int, id: Long) {
 
-                if(position == 1) {
-                    ratingSelected = "star"
-                    adapter = SkillItemAdapter(skillsList, ratingSelected)
-                }
-                else if(position == 2)
+                when(position)
                 {
-                    ratingSelected = "progressBar"
-                    adapter = SkillItemAdapter(skillsList, ratingSelected)
+                    1->ratingSelected = "star"
+                    2->ratingSelected = "progressBar"
                 }
 
+
+                adapter = SkillItemAdapter(skillsList, ratingSelected)
                 binding.rvSkills.adapter = adapter
                 binding.rvSkills.layoutManager = LinearLayoutManager(context)
                 adapter.notifyDataSetChanged()

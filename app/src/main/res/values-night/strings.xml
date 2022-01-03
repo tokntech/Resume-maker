@@ -52,5 +52,8 @@
     <string name="add_a_new_resume">Add a new resume</string>
     <string name="add_a_new_cover_letter">Add a new cover letter</string>
     <string name="other_templates">Other templates</string>
+    <string name="skill">Skill</string>
+    <string name="remove">Remove</string>
+    <string name="rearrange">Rearrange</string>
 
 </resources>

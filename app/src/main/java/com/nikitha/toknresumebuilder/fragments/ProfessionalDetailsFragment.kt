@@ -51,7 +51,7 @@ private lateinit var binding : FragmentProfessionalDetailsBinding
            Designation("","","")
        )
 
-        val professionalDetails = ProfessionalDetails("", "", "",designation)
+        val professionalDetails = ProfessionalDetails("", "", "",designation, 0)
         professionalDetailsItems.add(professionalDetails)
 
         designationItems.addAll(designation)
@@ -69,7 +69,7 @@ private lateinit var binding : FragmentProfessionalDetailsBinding
 
         binding.tvAddProfSection.setOnClickListener {
 
-            var profDetails_new = ProfessionalDetails("", "", "", designation)
+            var profDetails_new = ProfessionalDetails("", "", "", designation, 0)
             professionalDetailsItems.add(profDetails_new)
 
             adapter = ProfessionItemAdapter(professionalDetailsItems)
