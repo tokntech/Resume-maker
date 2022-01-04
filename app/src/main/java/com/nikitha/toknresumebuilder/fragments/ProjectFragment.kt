@@ -11,17 +11,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.adapter.ProjectItemAdapter
 import com.nikitha.toknresumebuilder.databinding.FragmentProjectBinding
 import com.nikitha.toknresumebuilder.model.Projects
+import com.nikitha.toknresumebuilder.viewmodel.ResumeViewModel
 
 class ProjectFragment : Fragment() {
 
     private lateinit var binding: FragmentProjectBinding
-    private var projectsList : ArrayList<Projects> = ArrayList<Projects>()
+    private var projectsList : ArrayList<Projects> = ArrayList()
+    private lateinit var resumeViewModel : ResumeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,11 +44,15 @@ class ProjectFragment : Fragment() {
 
         activity?.title = "Sections"
 
+        resumeViewModel = ViewModelProvider(this)[ResumeViewModel::class.java]
+        val resumeId = arguments?.getInt("resumeId")
+
+
         val colorDrawable = ColorDrawable(Color.TRANSPARENT)
         (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
         (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
 
-        val projectItem = Projects("","","","", "", 0)
+        val projectItem = Projects("","","","", "", resumeId!!)
         projectsList.add(projectItem)
 
 
@@ -56,7 +63,7 @@ class ProjectFragment : Fragment() {
 
         binding.tvAddProjSection.setOnClickListener {
 
-            val projectItem = Projects("","","","", "", 0)
+            val projectItem = Projects("","","","", "", resumeId)
             projectsList.add(projectItem)
 
             adapter = ProjectItemAdapter(projectsList)
@@ -66,7 +73,15 @@ class ProjectFragment : Fragment() {
         }
 
         binding.btnSave.setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(R.id.action_projectFragment_to_saveFragment)
+
+            projectsList.forEach {
+                resumeViewModel.insertProjectDetails(it)
+            }
+
+            val b  = Bundle()
+            b.putInt("resumeId", resumeId)
+
+            NavHostFragment.findNavController(this).navigate(R.id.action_projectFragment_to_saveFragment,b)
         }
 
     }

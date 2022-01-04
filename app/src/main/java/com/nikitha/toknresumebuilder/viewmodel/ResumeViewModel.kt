@@ -6,8 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.nikitha.toknresumebuilder.database.ResumeDatabase
 import com.nikitha.toknresumebuilder.database.ResumeRepository
-import com.nikitha.toknresumebuilder.model.EducationalDetails
-import com.nikitha.toknresumebuilder.model.PersonalDetails
+import com.nikitha.toknresumebuilder.model.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -37,6 +36,26 @@ class ResumeViewModel(application: Application) : AndroidViewModel(application) 
     fun insertEducationalDetails(educationalDetails: EducationalDetails) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertEducationDetails(educationalDetails)
+        }
+
+    fun insertProfessionalDetails(professionalDetails: ProfessionalDetails) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insertProfessionalDetails(professionalDetails)
+        }
+
+    fun insertSkillDetails(skill: Skill) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insertSkillDetails(skill)
+        }
+
+    fun insertProjectDetails(projects: Projects) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insertProjectDetails(projects)
+        }
+
+    fun updateObjective(objective: Objective) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateObjective(objective)
         }
 
 }

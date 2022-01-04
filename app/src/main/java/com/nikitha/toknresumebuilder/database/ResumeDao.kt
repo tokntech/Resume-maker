@@ -1,10 +1,7 @@
 package com.nikitha.toknresumebuilder.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.nikitha.toknresumebuilder.database.relations.PersonalAndEducational
 import com.nikitha.toknresumebuilder.model.*
 
@@ -25,6 +22,9 @@ interface ResumeDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertProfessionalDetails(professionalDetails: ProfessionalDetails)
+
+    @Update(entity= PersonalDetails::class)
+    suspend fun updateObjective(objective: Objective)
 
     @Query("Select * from PersonalDetails where resume_id=:resume_id")
     suspend fun getEducationDetails(resume_id:Int): List<PersonalAndEducational>

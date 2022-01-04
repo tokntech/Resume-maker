@@ -58,7 +58,15 @@
     <fragment
         android:id="@+id/professionalDetailsFragment"
         android:name="com.nikitha.toknresumebuilder.fragments.ProfessionalDetailsFragment"
-        android:label="Sections" />
+        android:label="Sections" >
+        <argument
+            android:name="resumeId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_professionalDetailsFragment_to_skillsFragment"
+            app:destination="@id/skillsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/projectFragment"
         android:name="com.nikitha.toknresumebuilder.fragments.ProjectFragment"
@@ -66,16 +74,35 @@
         <action
             android:id="@+id/action_projectFragment_to_saveFragment"
             app:destination="@id/saveFragment" />
+        <argument
+            android:name="resumeId"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/objectiveFragment"
         android:name="com.nikitha.toknresumebuilder.fragments.ObjectiveFragment"
-        android:label="Sections" />
+        android:label="Sections" >
+        <argument
+            android:name="resumeId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_objectiveFragment_to_projectFragment"
+            app:destination="@id/projectFragment" />
+    </fragment>
     <fragment
         android:id="@+id/skillsFragment"
         android:name="com.nikitha.toknresumebuilder.fragments.SkillsFragment"
         android:label="Sections"
-        tools:layout="@layout/fragment_skills" />
+        tools:layout="@layout/fragment_skills" >
+        <argument
+            android:name="resumeId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_skillsFragment_to_objectiveFragment"
+            app:destination="@id/objectiveFragment" />
+    </fragment>
     <fragment
         android:id="@+id/rearrangeFragment"
         android:name="com.nikitha.toknresumebuilder.fragments.RearrangeFragment"

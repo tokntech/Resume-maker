@@ -1,7 +1,6 @@
 package com.nikitha.toknresumebuilder.fragments
 
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,14 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.nikitha.toknresumebuilder.databinding.FragmentPreviewBinding
-import com.nikitha.toknresumebuilder.model.PersonalDetails
-import com.nikitha.toknresumebuilder.model.School
-import android.print.PrintManager
-import android.print.PrintDocumentAdapter
-import android.print.PrintJob
-import android.webkit.WebView
-import android.print.PrintAttributes
-import com.nikitha.toknresumebuilder.model.Projects
 
 
 class PreviewFragment : Fragment() {

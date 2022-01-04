@@ -48,7 +48,7 @@ class EducationDetailsFragment : Fragment() {
 
         val resumeId = arguments?.getLong("resumeId")?.toInt()
 
-        val educationDetails = resumeId?.let { EducationalDetails("", "", "", "", "" , "", it) }
+        val educationDetails = EducationalDetails("", "", "", "", "" , "", resumeId!!)
         if (educationDetails != null) {
             academicDetailsItems.add(educationDetails)
         }
@@ -60,7 +60,7 @@ class EducationDetailsFragment : Fragment() {
 
         binding.tvAddEduSection.setOnClickListener {
 
-            val educationDetails_new = EducationalDetails("", "", "", "", "" , "", 1)
+            val educationDetails_new = EducationalDetails("", "", "", "", "" , "", resumeId)
             academicDetailsItems.add(educationDetails_new)
 
             adapter = EducationItemAdapter(academicDetailsItems, activity)
@@ -71,13 +71,15 @@ class EducationDetailsFragment : Fragment() {
 
         binding.btnSave.setOnClickListener{
 
-
             academicDetailsItems.forEach{
                 resumeViewModel.insertEducationalDetails(it)
             }
 
 
-            NavHostFragment.findNavController(this).navigate(R.id.action_educationDetailsFragment_to_professionalDetailsFragment)
+            val b = Bundle()
+            b.putInt("resumeId", resumeId)
+
+            NavHostFragment.findNavController(this).navigate(R.id.action_educationDetailsFragment_to_professionalDetailsFragment, b)
         }
 
        /* binding.btnPrevious.setOnClickListener {

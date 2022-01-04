@@ -16,4 +16,6 @@ class ResumeRepository(private var dao: ResumeDao) {
     suspend fun insertProjectDetails(project: Projects) = dao.insertProjectDetails(project)
 
     suspend fun insertSkillDetails(skills: Skill) = dao.insertSkillDetails(skills)
+
+    suspend fun updateObjective(objective: Objective) = dao.updateObjective(objective)
 }

@@ -45,6 +45,7 @@ class PersonalDetailsFragment : Fragment() {
     private  var linkedInText : String =""
     private  var linkedInUrl : String = ""
     private var profilePicPath :String = ""
+    private val TAG = "PersonalDetailsFragment"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -120,23 +121,11 @@ class PersonalDetailsFragment : Fragment() {
                 personalDetails = PersonalDetails(0, binding.etName.text.toString(),
                 binding.etTitle.text.toString(), binding.etAddress.text.toString(),
                 binding.etPhoneNum.text.toString(), binding.etEmail.text.toString(),
-                "", linkedInText, linkedInUrl, "")
+                "", linkedInText, linkedInUrl, profilePicPath)
 
 
-                var resumeId = 0L
-          /* resumeViewModel.insertPersonalDetails(personalDetails).observe(this, Observer {
-                resumeId = it
-               val bundle = bundleOf("resumeId" to resumeId)
+            val resumeId: Long = resumeViewModel.insertPersonalDetails(personalDetails)
 
-               Log.d("PersonalDetailsFragment", "Inserted id is $resumeId")
-               NavHostFragment.findNavController(this).navigate(R.id.action_personalDetailsFragment_to_educationDetailsFragment, bundle)
-            })*/
-
-            resumeId = resumeViewModel.insertPersonalDetails(personalDetails)
-
-
-
-            //val bundle = bundleOf("resumeId" to resumeId)
             val b = Bundle()
             b.putLong("resumeId", resumeId)
 
@@ -150,6 +139,9 @@ class PersonalDetailsFragment : Fragment() {
             if(it.resultCode == Activity.RESULT_OK)
             {
                 val takenPhoto = BitmapFactory.decodeFile(filePhoto.absolutePath)
+                profilePicPath = filePhoto.absolutePath
+
+                Log.d(TAG, "Profile pic path is $profilePicPath")
                 binding.ivProfilePic.setImageBitmap(takenPhoto)
             }
         }

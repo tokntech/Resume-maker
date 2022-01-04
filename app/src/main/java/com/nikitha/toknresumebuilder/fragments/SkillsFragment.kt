@@ -14,11 +14,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.set
 import androidx.core.text.toSpannable
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.adapter.SkillItemAdapter
 import com.nikitha.toknresumebuilder.databinding.FragmentSkillsBinding
 import com.nikitha.toknresumebuilder.model.Skill
+import com.nikitha.toknresumebuilder.viewmodel.ResumeViewModel
 
 class SkillsFragment : Fragment() {
 
@@ -26,6 +29,7 @@ class SkillsFragment : Fragment() {
 
     private var skillsList = ArrayList<Skill>()
     private var ratingSelected ="none"
+    private lateinit var resumeViewModel : ResumeViewModel
     val spinner_item = arrayOf("No ratings", "Stars", "Progress bar")
 
     override fun onCreateView(
@@ -49,7 +53,10 @@ class SkillsFragment : Fragment() {
         (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
         (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
 
-        val skillsItem = Skill("", "", 1, 0 )
+        resumeViewModel = ViewModelProvider(this)[ResumeViewModel::class.java]
+        val resumeId = arguments?.getInt("resumeId")
+
+        val skillsItem = Skill("", "", 1, resumeId!! )
         skillsList.add(skillsItem)
 
         var adapter = SkillItemAdapter(skillsList, "")
@@ -59,7 +66,7 @@ class SkillsFragment : Fragment() {
 
         binding.tvAddSkillSection.setOnClickListener {
 
-            val skills_new = Skill("", "", 1, 0)
+            val skills_new = Skill("", "", 1, resumeId)
             skillsList.add(skills_new)
 
             adapter = SkillItemAdapter(skillsList, ratingSelected )
@@ -97,8 +104,15 @@ class SkillsFragment : Fragment() {
         binding.btnSave.text = btntext
 
         binding.btnSave.setOnClickListener {
-            val fragment = ObjectiveFragment()
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerView, fragment)?.commit()
+
+            skillsList.forEach {
+                resumeViewModel.insertSkillDetails(it)
+            }
+
+            val b = Bundle()
+            b.putInt("resumeId", resumeId)
+            NavHostFragment.findNavController(this).navigate(R.id.action_skillsFragment_to_objectiveFragment, b)
+
         }
     }
 
