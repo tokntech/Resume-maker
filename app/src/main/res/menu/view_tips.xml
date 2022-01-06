@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:icon="@drawable/ic_tips"
-        android:visible="true"
         android:id="@+id/tips"
-        app:showAsAction="always|withText"
-        android:title="Tips" />
+        android:icon="@drawable/ic_tips_btn"
+        android:title="Tips"
+        android:visible="true"
+        app:showAsAction="always|withText" />
 
     <item
         android:icon="@drawable/ic_preview"

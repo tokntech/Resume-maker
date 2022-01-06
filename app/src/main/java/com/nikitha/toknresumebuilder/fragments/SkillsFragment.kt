@@ -4,22 +4,22 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.style.AbsoluteSizeSpan
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.set
 import androidx.core.text.toSpannable
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.adapter.SkillItemAdapter
 import com.nikitha.toknresumebuilder.databinding.FragmentSkillsBinding
+import com.nikitha.toknresumebuilder.model.PersonalDetails
 import com.nikitha.toknresumebuilder.model.Skill
 import com.nikitha.toknresumebuilder.viewmodel.ResumeViewModel
 
@@ -54,7 +54,13 @@ class SkillsFragment : Fragment() {
         (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
 
         resumeViewModel = ViewModelProvider(this)[ResumeViewModel::class.java]
-        val resumeId = arguments?.getInt("resumeId")
+        var resumeId = arguments?.getInt("resumeId")
+
+        if(resumeId == 0)
+        {
+            val personalDetails = PersonalDetails(0, "", "", "", "", "","","","","","")
+            resumeId = resumeViewModel.insertPersonalDetails(personalDetails).toInt()
+        }
 
         val skillsItem = Skill("", "", 1, resumeId!! )
         skillsList.add(skillsItem)

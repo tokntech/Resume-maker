@@ -6,12 +6,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.nikitha.toknresumebuilder.databinding.ActivityHolderBinding
-import com.nikitha.toknresumebuilder.fragments.PreviewFragment
 
 
 class HolderActivity : AppCompatActivity()  {
@@ -44,6 +42,8 @@ class HolderActivity : AppCompatActivity()  {
         menuInflater.inflate(R.menu.view_tips, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId)

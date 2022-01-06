@@ -1,10 +1,7 @@
 package com.nikitha.toknresumebuilder.database
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
+import androidx.room.*
 import com.nikitha.toknresumebuilder.model.EducationalDetails
 import com.nikitha.toknresumebuilder.model.PersonalDetails
 import com.nikitha.toknresumebuilder.model.ProfessionalDetails
@@ -20,7 +17,8 @@ import com.nikitha.toknresumebuilder.model.Skill
         Projects::class,
         Skill::class
     ],
-    version = 1
+    version = 1,
+    exportSchema = true,
 )
 @TypeConverters(Converter::class)
 abstract class ResumeDatabase: RoomDatabase()
@@ -37,8 +35,8 @@ abstract class ResumeDatabase: RoomDatabase()
                 return INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
                     ResumeDatabase::class.java,
-                    "resume_db"
-                ).build()
+                    "resume_db2")
+                    .build()
             }
         }
     }

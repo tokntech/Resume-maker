@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.adapter.ProjectItemAdapter
 import com.nikitha.toknresumebuilder.databinding.FragmentProjectBinding
+import com.nikitha.toknresumebuilder.model.PersonalDetails
 import com.nikitha.toknresumebuilder.model.Projects
 import com.nikitha.toknresumebuilder.viewmodel.ResumeViewModel
 
@@ -45,32 +46,38 @@ class ProjectFragment : Fragment() {
         activity?.title = "Sections"
 
         resumeViewModel = ViewModelProvider(this)[ResumeViewModel::class.java]
-        val resumeId = arguments?.getInt("resumeId")
+        var resumeId = arguments?.getInt("resumeId")
 
+        if(resumeId == 0)
+        {
+            val personalDetails = PersonalDetails(0, "", "", "", "", "","","","","","")
+            resumeId = resumeViewModel.insertPersonalDetails(personalDetails).toInt()
+        }
 
         val colorDrawable = ColorDrawable(Color.TRANSPARENT)
         (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
         (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
 
-        val projectItem = Projects("","","","", "", resumeId!!)
+        val projectItem = Projects("","","","", "", "", resumeId!!)
         projectsList.add(projectItem)
 
 
-        var adapter = ProjectItemAdapter(projectsList)
+        var adapter = ProjectItemAdapter(context!!, projectsList)
         binding.rvProjDetails.adapter = adapter
         binding.rvProjDetails.layoutManager = LinearLayoutManager(context)
         adapter.notifyDataSetChanged()
 
         binding.tvAddProjSection.setOnClickListener {
 
-            val projectItem = Projects("","","","", "", resumeId)
+            val projectItem = Projects("","","","", "", "", resumeId)
             projectsList.add(projectItem)
 
-            adapter = ProjectItemAdapter(projectsList)
+            adapter = ProjectItemAdapter(context!!, projectsList)
             binding.rvProjDetails.adapter = adapter
             binding.rvProjDetails.layoutManager = LinearLayoutManager(context)
             adapter.notifyDataSetChanged()
         }
+
 
         binding.btnSave.setOnClickListener {
 

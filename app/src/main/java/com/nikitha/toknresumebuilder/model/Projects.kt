@@ -15,7 +15,8 @@ data class Projects(
     var start_date: String = "",
     var end_date: String = "",
     var description: String = "",
-    var link:String = "",
+    var projText: String = "",
+    var projLink:String = "",
     var resume_id:Int,
 
     @PrimaryKey(autoGenerate = true)

@@ -16,11 +16,16 @@ import androidx.core.view.MenuCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.model.EducationalDetails
+import java.text.SimpleDateFormat
 import java.util.*
 
 
 class EducationItemAdapter(private val educationDetails: ArrayList<EducationalDetails>, private val activity: Activity?) : RecyclerView.Adapter<EducationItemAdapter.ViewHolder>() {
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    private val TAG = "EducationItemAdapter"
+    private var dateSelected = intArrayOf(0,1,2,3)
+
+        inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var etCourseName: EditText? = itemView.findViewById(R.id.etCourse)
         var etSchoolName: EditText? =  itemView.findViewById(R.id.etSchool)
@@ -78,23 +83,98 @@ class EducationItemAdapter(private val educationDetails: ArrayList<EducationalDe
                 }
             })
 
-            etDuration?.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            etDuration?.setOnClickListener {
+
+                //region
+                val dialog = Dialog(activity!!)
+                dialog.setCancelable(true)
+                dialog.setContentView(R.layout.dialog_month_year_picker)
+
+                val startMonthPicker = dialog.findViewById(R.id.picker_month) as NumberPicker
+                val startYearPicker = dialog.findViewById(R.id.picker_year) as NumberPicker
+                val btnCancel = dialog.findViewById<TextView>(R.id.btnCancel)
+                val btnOk = dialog.findViewById<TextView>(R.id.btnOk)
+
+                val cal: Calendar = Calendar.getInstance()
+
+                startMonthPicker.run {
+                    startMonthPicker.minValue = 0
+                    startMonthPicker.maxValue = 11
+                    startMonthPicker.value = cal.get(Calendar.MONTH)
+                    displayedValues = arrayOf("Jan","Feb","Mar","Apr","May","June","July",
+                        "Aug","Sep","Oct","Nov","Dec")
                 }
 
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                   // educationDetails.get(position).duration = etDuration!!.text.toString()
-                    var dateSelected: IntArray
-                    ViewDialog().apply {
-                       dateSelected = showMonthYearDialog(activity)
-                   }
-                    educationDetails.get(position).start_year = dateSelected[0].toString()
+                val year: Int = cal.get(Calendar.YEAR)
+
+                // If user doesn't select any, show the default values of current year and jan for month
+                dateSelected[1] = year
+                dateSelected[3] = year
+                dateSelected[2] = 0
+
+                startYearPicker.minValue = 1990
+                startYearPicker.maxValue = 2099
+                startYearPicker.value = year
+
+
+                //End year picker
+                val endMonthPicker = dialog.findViewById(R.id.picker_Endmonth) as NumberPicker
+                val endYearPicker = dialog.findViewById(R.id.picker_Endyear) as NumberPicker
+
+                endMonthPicker.run {
+                    endMonthPicker.minValue = 0
+                    endMonthPicker.maxValue = 11
+                    endMonthPicker.value = cal.get(Calendar.MONTH)
+                    displayedValues = arrayOf("Jan","Feb","Mar","Apr","May","June","July",
+                        "Aug","Sep","Oct","Nov","Dec")
                 }
 
-                override fun afterTextChanged(p0: Editable?) {
+                endYearPicker.minValue = 1990
+                endYearPicker.maxValue = 2099
+                endYearPicker.value = year
 
+                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                startMonthPicker.setOnValueChangedListener { _, _, p2 -> dateSelected[0] = p2 }
+
+                startYearPicker.setOnValueChangedListener { _, _, p2 -> dateSelected[1] = p2 }
+
+                endMonthPicker.setOnValueChangedListener { _, _, p2 -> dateSelected[2] = p2 }
+
+                endYearPicker.setOnValueChangedListener { _, _, p2 -> dateSelected[3] = p2 }
+
+                btnCancel.setOnClickListener {
+                    dialog.dismiss()
                 }
-            })
+                btnOk.setOnClickListener {
+
+                    val stringStartDate=(dateSelected[0] +1).toString() + "-" + dateSelected[1].toString()
+                    val stringEndDate=(dateSelected[2] +1).toString() + "-" + dateSelected[3].toString()
+
+                    val dateFormatMMyyyy = SimpleDateFormat("MM-yyyy", Locale.ENGLISH)
+
+                    val start_date = dateFormatMMyyyy.parse(stringStartDate)
+                    val end_date = dateFormatMMyyyy.parse(stringEndDate)
+
+                    val calendar = Calendar.getInstance()
+                    calendar.time = start_date
+
+                    val end_calendar = Calendar.getInstance()
+                    end_calendar.time = end_date
+
+                    //val stringStartDate=(dateSelected[0] +1).toString() + "-" + dateSelected[1].toString()
+
+                    educationDetails[position].start_year = calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH) + calendar.get(Calendar.YEAR)
+                    educationDetails[position].end_year = end_calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH) + end_calendar.get(Calendar.YEAR).toString()
+
+                    etDuration!!.setText( educationDetails[position].start_year + "to" +educationDetails[position].end_year)
+
+                    dialog.dismiss()
+                }
+                dialog.show()
+
+                //end region
+            }
 
             keyachievements?.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -140,7 +220,6 @@ class EducationItemAdapter(private val educationDetails: ArrayList<EducationalDe
         holder.etLocation?.setText(educationDetails[position].location)
         holder.keyachievements?.setText(educationDetails[position].key_achievements)
 
-
         holder.bind(position)
     }
 
@@ -148,16 +227,10 @@ class EducationItemAdapter(private val educationDetails: ArrayList<EducationalDe
         return educationDetails.size
     }
 
-
-}
-
-class ViewDialog {
-    fun showMonthYearDialog(activity: Activity?) : IntArray {
+    fun showMonthYearDialog(activity: Activity?, position: Int)  {
         val dialog = Dialog(activity!!)
         dialog.setCancelable(true)
         dialog.setContentView(R.layout.dialog_month_year_picker)
-
-        val dateSelected= intArrayOf(0,1,2,3)
 
         val startMonthPicker = dialog.findViewById(R.id.picker_month) as NumberPicker
         val startYearPicker = dialog.findViewById(R.id.picker_year) as NumberPicker
@@ -199,22 +272,34 @@ class ViewDialog {
 
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        startMonthPicker.setOnValueChangedListener { p0, p1, p2 -> dateSelected[0] = p2 }
+        startMonthPicker.setOnValueChangedListener { _, _, p2 -> dateSelected[0] = p2 }
 
-        startYearPicker.setOnValueChangedListener { p0, p1, p2 -> dateSelected[1] = p2 }
+        startYearPicker.setOnValueChangedListener { _, _, p2 -> dateSelected[1] = p2 }
 
-        endMonthPicker.setOnValueChangedListener { p0, p1, p2 -> dateSelected[2] = p2 }
+        endMonthPicker.setOnValueChangedListener { _, _, p2 -> dateSelected[2] = p2 }
 
-        endYearPicker.setOnValueChangedListener { p0, p1, p2 -> dateSelected[3] = p2 }
+        endYearPicker.setOnValueChangedListener { _, _, p2 -> dateSelected[3] = p2 }
 
         btnCancel.setOnClickListener {
             dialog.dismiss()
         }
         btnOk.setOnClickListener {
 
+            val stringDate=(dateSelected[0] + 1).toString() + "-" + dateSelected[1].toString()
+
+            val dateFormatMMyyyy = SimpleDateFormat("MM-yyyy", Locale.ENGLISH)
+
+            val date = dateFormatMMyyyy.parse(stringDate)
+            val calendar = Calendar.getInstance()
+            calendar.time = date
+
+            educationDetails[position].start_year = calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH)
+            educationDetails[position].end_year = calendar.get(Calendar.YEAR).toString()
+
+
+            dialog.dismiss()
         }
         dialog.show()
-
-        return dateSelected
     }
+
 }

@@ -31,9 +31,6 @@
                 android:layout_marginTop="8dp"
                 android:hint="Professional Details"
                 app:boxStrokeColor="#808080"
-                app:endIconDrawable="@drawable/blog_pic"
-                app:endIconTint="@null"
-                app:endIconMode="custom"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText

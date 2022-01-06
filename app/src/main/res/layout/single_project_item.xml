@@ -75,6 +75,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
+                        android:focusable="false"
+                        android:maxLines="1"
                         android:layout_marginEnd="10dp"
                         android:background="@drawable/edit_text_bg" />
 
@@ -89,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="2"
-                android:hint="Duration"
+                android:hint="@string/description"
                 app:endIconDrawable="@drawable/info"
                 app:endIconMode="custom"
                 app:endIconTint="@null"
@@ -113,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="2"
-                android:hint="Project Link (optional)"
+                android:hint="@string/project_link_optional"
                 app:endIconDrawable="@drawable/info"
                 app:endIconMode="custom"
                 app:endIconTint="@null"

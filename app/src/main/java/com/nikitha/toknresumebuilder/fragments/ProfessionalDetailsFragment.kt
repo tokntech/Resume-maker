@@ -15,14 +15,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikitha.toknresumebuilder.R
-import com.nikitha.toknresumebuilder.adapter.DesignationItemAdapter
 import com.nikitha.toknresumebuilder.adapter.ProfessionItemAdapter
 import com.nikitha.toknresumebuilder.databinding.FragmentProfessionalDetailsBinding
 import com.nikitha.toknresumebuilder.model.Designation
+import com.nikitha.toknresumebuilder.model.PersonalDetails
 import com.nikitha.toknresumebuilder.model.ProfessionalDetails
 import com.nikitha.toknresumebuilder.viewmodel.ResumeViewModel
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class ProfessionalDetailsFragment : Fragment() {
@@ -47,7 +45,13 @@ private lateinit var binding : FragmentProfessionalDetailsBinding
         activity?.title = "Sections"
 
         resumeViewModel = ViewModelProvider(this)[ResumeViewModel::class.java]
-        val resumeId = arguments?.getInt("resumeId")
+        var resumeId = arguments?.getInt("resumeId")
+
+        if(resumeId == 0)
+        {
+            val personalDetails = PersonalDetails(0, "", "", "", "", "","","","","","")
+            resumeId = resumeViewModel.insertPersonalDetails(personalDetails).toInt()
+        }
 
         val colorDrawable = ColorDrawable(Color.TRANSPARENT)
         (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
@@ -67,7 +71,7 @@ private lateinit var binding : FragmentProfessionalDetailsBinding
         binding.btnSave.text = btntext
 
 
-        var adapter = ProfessionItemAdapter(professionalDetailsItems)
+        var adapter = ProfessionItemAdapter(professionalDetailsItems, activity)
 
         binding.rvProfDetails.adapter = adapter
         binding.rvProfDetails.layoutManager = LinearLayoutManager(context)
@@ -78,7 +82,7 @@ private lateinit var binding : FragmentProfessionalDetailsBinding
             var profDetails_new = ProfessionalDetails("", "", "", designation, resumeId)
             professionalDetailsItems.add(profDetails_new)
 
-            adapter = ProfessionItemAdapter(professionalDetailsItems)
+            adapter = ProfessionItemAdapter(professionalDetailsItems, activity)
             binding.rvProfDetails.adapter = adapter
             binding.rvProfDetails.layoutManager = LinearLayoutManager(context)
             adapter.notifyDataSetChanged()

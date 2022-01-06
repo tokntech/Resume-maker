@@ -1,5 +1,6 @@
 package com.nikitha.toknresumebuilder.adapter
 
+import android.app.Activity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -7,14 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.model.Designation
 import com.nikitha.toknresumebuilder.model.ProfessionalDetails
 
-class ProfessionItemAdapter(private val professionalDetails: ArrayList< ProfessionalDetails>) : RecyclerView.Adapter<ProfessionItemAdapter.ViewHolder>()
+class ProfessionItemAdapter(private val professionalDetails: ArrayList< ProfessionalDetails>, private val activity: Activity?) : RecyclerView.Adapter<ProfessionItemAdapter.ViewHolder>()
 {
     private val viewPool = RecyclerView.RecycledViewPool()
 
@@ -79,19 +79,19 @@ class ProfessionItemAdapter(private val professionalDetails: ArrayList< Professi
             designationLayoutManager.initialPrefetchItemCount =1
             rvDesignation?.apply {
                 layoutManager = designationLayoutManager
-                adapter = DesignationItemAdapter(designationItems)
+                adapter = DesignationItemAdapter( designationItems, activity )
                 setRecycledViewPool(viewPool)
             }
 
             tvAddDesignation?.setOnClickListener {
-                val designation_new = Designation("","","")
+                val designation_new = Designation("","","" , "")
                 designationItems.add(designation_new)
 
                 val designationLayoutManager_new = LinearLayoutManager(rvDesignation?.context, RecyclerView.VERTICAL, false)
                 designationLayoutManager_new.initialPrefetchItemCount = designationItems.size
                 rvDesignation?.apply {
                     layoutManager = designationLayoutManager_new
-                    adapter = DesignationItemAdapter(designationItems)
+                    adapter = DesignationItemAdapter(designationItems, activity)
                     setRecycledViewPool(viewPool)
                 }
             }

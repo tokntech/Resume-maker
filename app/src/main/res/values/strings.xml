@@ -59,6 +59,12 @@
     <string name="skill">Skill</string>
     <string name="remove">Remove</string>
     <string name="rearrange">Rearrange</string>
+    <string name="section">Section</string>
+    <string name="objective">Objective</string>
+    <string name="project">Project</string>
+    <string name="project_link_optional">Project Link (optional)</string>
+    <string name="duration">Duration</string>
+    <string name="description">Description</string>
 
     <array name="re_arrange_sections">
         <item>Personal Details</item>

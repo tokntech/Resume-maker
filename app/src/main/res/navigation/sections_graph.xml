@@ -34,6 +34,10 @@
         <action
             android:id="@+id/action_sectionsFragment_to_previewFragment"
             app:destination="@id/previewFragment" />
+        <argument
+            android:name="resumeId"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/personalDetailsFragment"

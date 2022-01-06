@@ -12,7 +12,9 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.text.style.AbsoluteSizeSpan
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -20,20 +22,18 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
-import androidx.core.os.bundleOf
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.textfield.TextInputEditText
-import com.nikitha.toknresumebuilder.viewmodel.ResumeViewModel
 import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.databinding.FragmentPersonalDetailsBinding
 import com.nikitha.toknresumebuilder.model.PersonalDetails
+import com.nikitha.toknresumebuilder.viewmodel.ResumeViewModel
 import java.io.File
+import java.io.FileOutputStream
 
 
 class PersonalDetailsFragment : Fragment() {
@@ -46,6 +46,8 @@ class PersonalDetailsFragment : Fragment() {
     private  var linkedInUrl : String = ""
     private var profilePicPath :String = ""
     private val TAG = "PersonalDetailsFragment"
+    private var extraSection = ""
+    private val READ_STORAGE_PERMISSION_REQUEST_CODE = 41
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -121,9 +123,10 @@ class PersonalDetailsFragment : Fragment() {
                 personalDetails = PersonalDetails(0, binding.etName.text.toString(),
                 binding.etTitle.text.toString(), binding.etAddress.text.toString(),
                 binding.etPhoneNum.text.toString(), binding.etEmail.text.toString(),
-                "", linkedInText, linkedInUrl, profilePicPath)
+                "", linkedInText, linkedInUrl, profilePicPath, extraSection)
 
 
+            Log.d("PersonalDetailsFragment", "Inserted id is $personalDetails")
             val resumeId: Long = resumeViewModel.insertPersonalDetails(personalDetails)
 
             val b = Bundle()
@@ -140,7 +143,6 @@ class PersonalDetailsFragment : Fragment() {
             {
                 val takenPhoto = BitmapFactory.decodeFile(filePhoto.absolutePath)
                 profilePicPath = filePhoto.absolutePath
-
                 Log.d(TAG, "Profile pic path is $profilePicPath")
                 binding.ivProfilePic.setImageBitmap(takenPhoto)
             }
@@ -150,6 +152,19 @@ class PersonalDetailsFragment : Fragment() {
         {
             if(it.resultCode == Activity.RESULT_OK)
             {
+                val hereUrl = it.data?.data
+                val inputStream = activity?.contentResolver?.openInputStream(hereUrl!!)
+                val byteArray = inputStream?.readBytes()
+
+                val directoryStorage = activity?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                val file = File.createTempFile( "profilePhoto", ".png", directoryStorage)
+                val os = FileOutputStream(file)
+                os.write(byteArray)
+                os.close()
+
+                //Store the pic path to database.
+                profilePicPath = file.absolutePath
+
                 binding.ivProfilePic.setImageURI(it.data?.data)
             }
         }
@@ -165,9 +180,15 @@ class PersonalDetailsFragment : Fragment() {
             val LinkBtn = customDialog.findViewById(R.id.btnAddLink) as Button
             TextBtn.setOnClickListener {
                 //Do something here
+                binding.etExtraSecLayout.visibility = View.VISIBLE
+                binding.tvAddSection.visibility = View.GONE
+                extraSection = binding.etExtraSec.text.toString()
                 customDialog.dismiss()
             }
             LinkBtn.setOnClickListener {
+                binding.etExtraSecLayout.visibility = View.VISIBLE
+                binding.tvAddSection.visibility = View.GONE
+                extraSection = binding.etExtraSec.text.toString()
                 customDialog.dismiss()
             }
             customDialog.show()

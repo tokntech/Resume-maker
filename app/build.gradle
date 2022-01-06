@@ -21,6 +21,17 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+
+        sourceSets {
+            // Adds exported schema location as test app assets.
+            getByName("androidTest").assets.srcDir("$projectDir/schemas")
+        }
     }
 
 
@@ -101,9 +112,11 @@ dependencies {
     //Gson
     implementation 'com.google.code.gson:gson:2.8.8'
 
-    implementation 'androidx.fragment:fragment-ktx:1.4.0-alpha04'
-    api 'androidx.navigation:navigation-fragment-ktx:2.4.0-alpha04'
-    api 'androidx.navigation:navigation-ui-ktx:2.4.0-alpha04'
+    implementation 'androidx.fragment:fragment-ktx:1.4.0'
+    api 'androidx.navigation:navigation-fragment-ktx:2.4.0-rc01'
+    api 'androidx.navigation:navigation-ui-ktx:2.4.0-rc01'
+
+    testImplementation("androidx.room:room-testing:2.4.0")
 
 
 

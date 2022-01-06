@@ -16,6 +16,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.databinding.FragmentObjectiveBinding
 import com.nikitha.toknresumebuilder.model.Objective
+import com.nikitha.toknresumebuilder.model.PersonalDetails
 import com.nikitha.toknresumebuilder.viewmodel.ResumeViewModel
 
 class ObjectiveFragment : Fragment() {
@@ -37,7 +38,13 @@ private lateinit var resumeViewModel : ResumeViewModel
         activity?.title = "Sections"
 
         resumeViewModel = ViewModelProvider(this)[ResumeViewModel::class.java]
-        val resumeId = arguments?.getInt("resumeId")
+        var resumeId = arguments?.getInt("resumeId")
+
+        if(resumeId == 0)
+        {
+            val personalDetails = PersonalDetails(0, "", "", "", "", "","","","","","")
+            resumeId = resumeViewModel.insertPersonalDetails(personalDetails).toInt()
+        }
 
         val colorDrawable = ColorDrawable(Color.TRANSPARENT)
         (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)

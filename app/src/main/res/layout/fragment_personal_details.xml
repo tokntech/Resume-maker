@@ -219,6 +219,30 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etExtraSecLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/section"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/etLinkedInUrlLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etExtraSec"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/edit_text_bg"
+                    android:drawableEnd="@drawable/info"
+                    android:inputType="text"
+                    android:shadowRadius="10" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
             <TextView
                 android:id="@+id/tvAddSection"
                 android:layout_width="wrap_content"
@@ -231,7 +255,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/etLinkedInUrlLayout" />
+                app:layout_constraintTop_toBottomOf="@id/etExtraSecLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

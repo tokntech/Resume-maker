@@ -1,11 +1,10 @@
 package com.nikitha.toknresumebuilder.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.nikitha.toknresumebuilder.R
+import androidx.fragment.app.Fragment
 import com.nikitha.toknresumebuilder.databinding.FragmentTutorialBinding
 
 class TutorialFragment : Fragment() {

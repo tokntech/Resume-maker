@@ -1,6 +1,7 @@
 package com.nikitha.toknresumebuilder.model
 
 import android.os.Parcelable
+import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
@@ -18,6 +19,8 @@ data class PersonalDetails(
     var objective:String = "",
     var linkedinText:String = "",
     var linkedInUrl: String = "",
-    var profilePhotoPath: String =""
+    var profilePhotoPath: String ="",
+    @NonNull
+    var extraSection: String = ""
 
 ) : Parcelable
