@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,24 +16,32 @@ import androidx.annotation.RequiresApi
 import androidx.core.view.MenuCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.nikitha.toknresumebuilder.R
+import com.nikitha.toknresumebuilder.fragments.EducationDetailsFragment
+import com.nikitha.toknresumebuilder.helper.ItemTouchHelperAdapter
+import com.nikitha.toknresumebuilder.helper.ItemTouchHelperViewHolder
 import com.nikitha.toknresumebuilder.model.EducationalDetails
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class EducationItemAdapter(private val educationDetails: ArrayList<EducationalDetails>, private val activity: Activity?) : RecyclerView.Adapter<EducationItemAdapter.ViewHolder>() {
+class EducationItemAdapter(private val educationDetails: ArrayList<EducationalDetails>,
+                           private val activity: Activity?,
+                           private val educationDetailsFragment: EducationDetailsFragment) :
+    RecyclerView.Adapter<EducationItemAdapter.ViewHolder>(),
+    ItemTouchHelperAdapter {
 
     private val TAG = "EducationItemAdapter"
     private var dateSelected = intArrayOf(0,1,2,3)
 
-        inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), ItemTouchHelperViewHolder {
 
         var etCourseName: EditText? = itemView.findViewById(R.id.etCourse)
         var etSchoolName: EditText? =  itemView.findViewById(R.id.etSchool)
         var etLocation:EditText? = itemView.findViewById(R.id.etLoc)
         var etDuration:EditText? = itemView.findViewById(R.id.etDuration)
         var keyachievements: EditText? = itemView.findViewById(R.id.etAchieve)
-        var ibOptions :ImageButton? = itemView.findViewById(R.id.ibOptions)
+        var ibOptions :ImageView? = itemView.findViewById(R.id.ibOptions)
 
 
         @RequiresApi(Build.VERSION_CODES.Q)
@@ -157,12 +166,10 @@ class EducationItemAdapter(private val educationDetails: ArrayList<EducationalDe
                     val end_date = dateFormatMMyyyy.parse(stringEndDate)
 
                     val calendar = Calendar.getInstance()
-                    calendar.time = start_date
+                    calendar.time = start_date!!
 
                     val end_calendar = Calendar.getInstance()
-                    end_calendar.time = end_date
-
-                    //val stringStartDate=(dateSelected[0] +1).toString() + "-" + dateSelected[1].toString()
+                    end_calendar.time = end_date!!
 
                     educationDetails[position].start_year = calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH) + calendar.get(Calendar.YEAR)
                     educationDetails[position].end_year = end_calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH) + end_calendar.get(Calendar.YEAR).toString()
@@ -189,23 +196,40 @@ class EducationItemAdapter(private val educationDetails: ArrayList<EducationalDe
                 }
             })
 
-            if(educationDetails.size > 1 && position>0)
-            {
-                ibOptions?.visibility = View.VISIBLE
-            }
 
             ibOptions?.setOnClickListener {
+
                 val popup = PopupMenu(activity, it)
                 val inflater = popup.menuInflater
                 popup.setForceShowIcon(true)
                 MenuCompat.setGroupDividerEnabled(popup.menu, true)
                 inflater.inflate(R.menu.options, popup.menu)
+
+                popup.setOnMenuItemClickListener { p0 ->
+                    Log.e(">>", p0.toString())
+
+                    if(p0.itemId == R.id.rearrange)
+                    educationDetailsFragment.enableDragAndDrop()
+                    else {
+                        educationDetails.removeAt(position)
+                        notifyItemRemoved(position)
+                    }
+                    true
+                }
                 popup.show()
             }
-
         }
 
-    }
+            override fun onItemSelected() {
+                itemView.setBackgroundColor(Color.LTGRAY)
+            }
+
+            override fun onItemClear() {
+                itemView.setBackgroundColor(0)
+            }
+
+
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return (ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.add_education_details, parent, false)))
@@ -220,6 +244,12 @@ class EducationItemAdapter(private val educationDetails: ArrayList<EducationalDe
         holder.etLocation?.setText(educationDetails[position].location)
         holder.keyachievements?.setText(educationDetails[position].key_achievements)
 
+
+        if(educationDetails.size > 1 && position>0)
+        {
+            holder.ibOptions?.visibility = View.VISIBLE
+        }
+
         holder.bind(position)
     }
 
@@ -227,79 +257,17 @@ class EducationItemAdapter(private val educationDetails: ArrayList<EducationalDe
         return educationDetails.size
     }
 
-    fun showMonthYearDialog(activity: Activity?, position: Int)  {
-        val dialog = Dialog(activity!!)
-        dialog.setCancelable(true)
-        dialog.setContentView(R.layout.dialog_month_year_picker)
 
-        val startMonthPicker = dialog.findViewById(R.id.picker_month) as NumberPicker
-        val startYearPicker = dialog.findViewById(R.id.picker_year) as NumberPicker
-        val btnCancel = dialog.findViewById<TextView>(R.id.btnCancel)
-        val btnOk = dialog.findViewById<TextView>(R.id.btnOk)
-
-        val cal: Calendar = Calendar.getInstance()
-
-        startMonthPicker.run {
-            startMonthPicker.minValue = 0
-            startMonthPicker.maxValue = 11
-            startMonthPicker.value = cal.get(Calendar.MONTH)
-            displayedValues = arrayOf("Jan","Feb","Mar","Apr","May","June","July",
-                "Aug","Sep","Oct","Nov","Dec")
-        }
-
-        val year: Int = cal.get(Calendar.YEAR)
-
-        startYearPicker.minValue = 1990
-        startYearPicker.maxValue = 2099
-        startYearPicker.value = year
-
-
-        //End year picker
-        val endMonthPicker = dialog.findViewById(R.id.picker_Endmonth) as NumberPicker
-        val endYearPicker = dialog.findViewById(R.id.picker_Endyear) as NumberPicker
-
-        endMonthPicker.run {
-            endMonthPicker.minValue = 0
-            endMonthPicker.maxValue = 11
-            endMonthPicker.value = cal.get(Calendar.MONTH)
-            displayedValues = arrayOf("Jan","Feb","Mar","Apr","May","June","July",
-                "Aug","Sep","Oct","Nov","Dec")
-        }
-
-        endYearPicker.minValue = 1990
-        endYearPicker.maxValue = 2099
-        endYearPicker.value = year
-
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        startMonthPicker.setOnValueChangedListener { _, _, p2 -> dateSelected[0] = p2 }
-
-        startYearPicker.setOnValueChangedListener { _, _, p2 -> dateSelected[1] = p2 }
-
-        endMonthPicker.setOnValueChangedListener { _, _, p2 -> dateSelected[2] = p2 }
-
-        endYearPicker.setOnValueChangedListener { _, _, p2 -> dateSelected[3] = p2 }
-
-        btnCancel.setOnClickListener {
-            dialog.dismiss()
-        }
-        btnOk.setOnClickListener {
-
-            val stringDate=(dateSelected[0] + 1).toString() + "-" + dateSelected[1].toString()
-
-            val dateFormatMMyyyy = SimpleDateFormat("MM-yyyy", Locale.ENGLISH)
-
-            val date = dateFormatMMyyyy.parse(stringDate)
-            val calendar = Calendar.getInstance()
-            calendar.time = date
-
-            educationDetails[position].start_year = calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH)
-            educationDetails[position].end_year = calendar.get(Calendar.YEAR).toString()
-
-
-            dialog.dismiss()
-        }
-        dialog.show()
+    override fun onItemMove(fromPosition: Int, toPosition: Int): Boolean {
+        Collections.swap(educationDetails, fromPosition, toPosition)
+        notifyItemMoved(fromPosition, toPosition)
+        return true
     }
+
+    override fun onItemDismiss(position: Int) {
+        educationDetails.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
 
 }

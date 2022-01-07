@@ -15,13 +15,37 @@
             app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
+                    android:id="@+id/holder_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@color/white"
                     app:title="Sections"
                     app:popupTheme="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-                    app:titleTextColor="#2D3748" />
+                    app:titleTextColor="#2D3748" >
+
+                <LinearLayout
+                android:id="@+id/llPreviewTips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="end">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tips_btn"
+                    android:layout_marginEnd="15dp"
+                    android:id="@+id/ivtips"
+                    android:contentDescription="Tips" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_preview"
+                    android:layout_gravity="center"
+                    android:id="@+id/ivPreview"
+                    android:layout_marginEnd="5dp"
+                    android:contentDescription="Preview" />
+                </LinearLayout>
+                </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
         <fragment

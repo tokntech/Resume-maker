@@ -62,13 +62,13 @@ class RecyclerListAdapter(val context: Context, dragStartListener: OnStartDragLi
         return true
     }
 
+
     override fun onItemDismiss(position: Int) {
         mItems.removeAt(position)
         notifyItemRemoved(position)
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        ItemTouchHelperViewHolder {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), ItemTouchHelperViewHolder {
         override fun onItemSelected() {
             itemView.setBackgroundColor(Color.LTGRAY)
         }

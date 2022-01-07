@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +34,11 @@ private lateinit var binding: FragmentTemplateBinding
         val colorDrawable = ColorDrawable(Color.TRANSPARENT)
         (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
         (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val toolbar  = activity?.findViewById<Toolbar>(R.id.holder_toolbar)
+        toolbar?.findViewById<ImageView>(R.id.ivtips)?.visibility = View.INVISIBLE
+        toolbar?.findViewById<ImageView>(R.id.ivPreview)?.visibility = View.INVISIBLE
 
         val templateImages = TemplateImages(R.drawable.ic_rectangle)
         val adapter = TemplateAdapter(templateImages)

@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
@@ -21,7 +22,7 @@ class HolderActivity : AppCompatActivity()  {
         binding = ActivityHolderBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(binding.holderToolbar)
 
         val colorDrawable = ColorDrawable(Color.TRANSPARENT)
         supportActionBar?.setBackgroundDrawable(colorDrawable)
@@ -38,24 +39,17 @@ class HolderActivity : AppCompatActivity()  {
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.view_tips, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId)
         {
          R.id.preview -> {
 
          }
-           /*android.R.id.home -> {
+           android.R.id.home -> {
                 onBackPressed()
-                finish()
+                //finish()
                 return true
-            }*/
+            }
         }
         return super.onOptionsItemSelected(item)
     }

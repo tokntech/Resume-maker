@@ -15,18 +15,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.FileProvider
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.nikitha.toknresumebuilder.R
 import com.nikitha.toknresumebuilder.databinding.FragmentPersonalDetailsBinding
@@ -47,7 +47,6 @@ class PersonalDetailsFragment : Fragment() {
     private var profilePicPath :String = ""
     private val TAG = "PersonalDetailsFragment"
     private var extraSection = ""
-    private val READ_STORAGE_PERMISSION_REQUEST_CODE = 41
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,8 +67,10 @@ class PersonalDetailsFragment : Fragment() {
         val colorDrawable = ColorDrawable(Color.TRANSPARENT)
         (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
         (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
-        //(activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val toolbar  = activity?.findViewById<Toolbar>(R.id.holder_toolbar)
+        toolbar?.findViewById<ImageView>(R.id.ivtips)?.visibility = View.VISIBLE
+        toolbar?.findViewById<ImageView>(R.id.ivPreview)?.visibility = View.VISIBLE
 
         val btntext = ("Save \n& proceed").toSpannable()
         btntext[5..15] = AbsoluteSizeSpan(10 , true)
@@ -79,7 +80,6 @@ class PersonalDetailsFragment : Fragment() {
             showPictureDialog()
         }
 
-
         binding.etPerDetLayout.setEndIconOnClickListener {
             Toast.makeText(context, "Blog clicked", Toast.LENGTH_SHORT).show()
         }
@@ -87,7 +87,6 @@ class PersonalDetailsFragment : Fragment() {
         binding.etLinkedInUrlLayout.setEndIconOnClickListener {
             val customDialog = Dialog(requireActivity())
             customDialog.setContentView(R.layout.dialog_linkedin_url)
-           // customDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             customDialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             val yesBtn = customDialog.findViewById(R.id.tvOk) as TextView
             val noBtn = customDialog.findViewById(R.id.tvCancel) as TextView
@@ -197,6 +196,7 @@ class PersonalDetailsFragment : Fragment() {
         }
 
         binding.btnPrevious.setOnClickListener {
+            NavHostFragment.findNavController(this).popBackStack()
         }
 
 

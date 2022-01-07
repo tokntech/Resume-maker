@@ -5,6 +5,20 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp">
 
+    <ImageView
+        android:id="@+id/ibProfOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/options"
+        android:src="@drawable/ic_options_1"
+        android:visibility="gone"
+        android:translationZ="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9999"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/profDetailscard"
         android:layout_width="match_parent"
@@ -122,7 +136,7 @@
                 android:layout_marginTop="20dp"
                 android:drawablePadding="10dp"
                 android:gravity="center"
-                android:text="Add another designation"
+                android:text="@string/add_another_designation"
                 app:drawableStartCompat="@drawable/add_circle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

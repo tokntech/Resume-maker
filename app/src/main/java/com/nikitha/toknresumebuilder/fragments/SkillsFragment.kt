@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.fragment.app.Fragment
@@ -52,6 +54,10 @@ class SkillsFragment : Fragment() {
         val colorDrawable = ColorDrawable(Color.TRANSPARENT)
         (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
         (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
+
+        val toolbar  = activity?.findViewById<Toolbar>(R.id.holder_toolbar)
+        toolbar?.findViewById<ImageView>(R.id.ivtips)?.visibility = View.VISIBLE
+        toolbar?.findViewById<ImageView>(R.id.ivPreview)?.visibility = View.VISIBLE
 
         resumeViewModel = ViewModelProvider(this)[ResumeViewModel::class.java]
         var resumeId = arguments?.getInt("resumeId")
@@ -120,6 +126,11 @@ class SkillsFragment : Fragment() {
             NavHostFragment.findNavController(this).navigate(R.id.action_skillsFragment_to_objectiveFragment, b)
 
         }
+
+        binding.btnPrevious.setOnClickListener {
+            NavHostFragment.findNavController(this).popBackStack()
+        }
+
     }
 
 

@@ -5,8 +5,11 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.ImageView
+
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.nikitha.toknresumebuilder.R
@@ -56,6 +59,10 @@ class SectionsFragment : Fragment() {
         (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val toolbar  = activity?.findViewById<Toolbar>(R.id.holder_toolbar)
+        toolbar?.findViewById<ImageView>(R.id.ivtips)?.visibility = View.INVISIBLE
+        toolbar?.findViewById<ImageView>(R.id.ivPreview)?.visibility = View.INVISIBLE
+
         binding.tvPerSection.setOnClickListener {
             NavHostFragment.findNavController(this).navigate(R.id.action_sectionsFragment_to_personalDetailsFragment ,b)
         }
@@ -86,10 +93,5 @@ class SectionsFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-        menu.clear()
     }
 }

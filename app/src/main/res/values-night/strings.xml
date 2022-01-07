@@ -61,5 +61,12 @@
     <string name="project_link_optional">Project Link (optional)</string>
     <string name="duration">Duration</string>
     <string name="description">Description</string>
+    <string name="school_university">School/ University</string>
+    <string name="location">Location</string>
+    <string name="course">Course</string>
+    <string name="duration">Duration</string>
+    <string name="key_achievements">* Key achievements</string>
+    <string name="add_another_designation">Add another designation</string>
+    <string name="project_title">Project Title</string>
 
 </resources>

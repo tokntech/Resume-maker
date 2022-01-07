@@ -1,30 +1,37 @@
 package com.nikitha.toknresumebuilder.adapter
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.NumberPicker
-import android.widget.TextView
+import android.widget.*
+import androidx.annotation.RequiresApi
+import androidx.core.view.MenuCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.nikitha.toknresumebuilder.R
+import com.nikitha.toknresumebuilder.fragments.ProjectFragment
+import com.nikitha.toknresumebuilder.helper.ItemTouchHelperAdapter
 import com.nikitha.toknresumebuilder.model.Projects
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ProjectItemAdapter(private val context: Context, private val projectList: ArrayList<Projects>): RecyclerView.Adapter<ProjectItemAdapter.ViewHolder>() {
+class ProjectItemAdapter (private val context: Context, private val projectList: ArrayList<Projects>,
+                        private val projectFragment: ProjectFragment): RecyclerView.Adapter<ProjectItemAdapter.ViewHolder>(), ItemTouchHelperAdapter {
 
     private var dateSelected = intArrayOf(0,1,2,3)
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        @RequiresApi(Build.VERSION_CODES.Q)
         fun bind(position: Int) {
 
             etProjectTitle?.addTextChangedListener(object : TextWatcher {
@@ -170,6 +177,36 @@ class ProjectItemAdapter(private val context: Context, private val projectList: 
                 customDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             }
 
+            if(projectList.size > 1 && position>0)
+            {
+                ibOptions?.visibility = View.VISIBLE
+            }
+            ibOptions?.setOnClickListener {
+
+                val popup = PopupMenu(context, it)
+                val inflater = popup.menuInflater
+                popup.setForceShowIcon(true)
+                MenuCompat.setGroupDividerEnabled(popup.menu, true)
+                inflater.inflate(R.menu.options, popup.menu)
+
+                popup.setOnMenuItemClickListener { p0 ->
+                    Log.e(">>", p0.toString())
+                    if(p0.itemId == R.id.rearrange)
+                        projectFragment.enableDragAndDrop()
+                    else if(p0.itemId ==  R.id.remove)
+                    {
+                        projectList.removeAt(position)
+                        notifyItemRemoved(position)
+
+                    }
+                    true
+                }
+
+                popup.show()
+
+            }
+
+
         }
 
         val etProjectTitle : EditText? = itemView.findViewById(R.id.etTitle)
@@ -177,6 +214,7 @@ class ProjectItemAdapter(private val context: Context, private val projectList: 
         val etProjectDesc : EditText? = itemView.findViewById(R.id.etProjDesc)
         val etProjectLink : EditText? = itemView.findViewById(R.id.etProjLink)
         val etProjectLinkLayout: TextInputLayout? = itemView.findViewById(R.id.etProjLinkLayout)
+        val ibOptions: ImageView? = itemView.findViewById(R.id.ibProjOptions)
 
     }
 
@@ -188,6 +226,7 @@ class ProjectItemAdapter(private val context: Context, private val projectList: 
         return (ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.single_project_item, parent, false)))
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onBindViewHolder(holder: ProjectItemAdapter.ViewHolder, position: Int) {
         holder.bind(position)
     }
@@ -196,7 +235,16 @@ class ProjectItemAdapter(private val context: Context, private val projectList: 
         return projectList.size
     }
 
+    override fun onItemMove(fromPosition: Int, toPosition: Int): Boolean {
+        Collections.swap(projectList, fromPosition, toPosition)
+        notifyItemMoved(fromPosition, toPosition)
+        return true
+    }
 
+    override fun onItemDismiss(position: Int) {
+        projectList.removeAt(position)
+        notifyItemRemoved(position)
+    }
 
 
 }

@@ -58,6 +58,9 @@
             android:name="resume_id"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_educationDetailsFragment_to_sectionsFragment"
+            app:destination="@id/sectionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/professionalDetailsFragment"

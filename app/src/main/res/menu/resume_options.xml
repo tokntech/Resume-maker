@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/grp1">
+
+        <item
+            android:id="@+id/create_copy"
+            android:icon="@drawable/ic_copy"
+            android:title="Create new copy"
+            android:visible="true"
+            app:showAsAction="always" />
+    </group>
+
+    <group android:id="@+id/grp2">
+
+        <item
+            android:id="@+id/remove_resume"
+            android:icon="@drawable/ic_remove_resume"
+            android:title="Remove resume"
+            android:visible="true"
+            app:showAsAction="always" />
+    </group>
+
+    <group android:id="@+id/grp3">
+        <item
+            android:id="@+id/rearrange"
+            android:icon="@drawable/ic_rearrange_resume"
+            android:title="@string/rearrange"
+            android:visible="true"
+            app:showAsAction="always" />
+
+    </group>
+
+    <group android:id="@+id/grp4">
+        <item
+            android:id="@+id/rename_resume"
+            android:icon="@drawable/ic_rename_resume"
+            android:title="Rename"
+            android:visible="true"
+            app:showAsAction="always" />
+
+    </group>
+</menu>

@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.lifecycle.ViewModelProvider
@@ -35,6 +37,15 @@ private lateinit var resumeViewModel : ResumeViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val colorDrawable = ColorDrawable(Color.TRANSPARENT)
+        (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
+        (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
+
+        val toolbar  = activity?.findViewById<Toolbar>(R.id.holder_toolbar)
+        toolbar?.findViewById<ImageView>(R.id.ivtips)?.visibility = View.VISIBLE
+        toolbar?.findViewById<ImageView>(R.id.ivPreview)?.visibility = View.VISIBLE
+
         activity?.title = "Sections"
 
         resumeViewModel = ViewModelProvider(this)[ResumeViewModel::class.java]
@@ -45,10 +56,6 @@ private lateinit var resumeViewModel : ResumeViewModel
             val personalDetails = PersonalDetails(0, "", "", "", "", "","","","","","")
             resumeId = resumeViewModel.insertPersonalDetails(personalDetails).toInt()
         }
-
-        val colorDrawable = ColorDrawable(Color.TRANSPARENT)
-        (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
-        (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.back_arrow)
 
         val btntext = ("Save \n& proceed").toSpannable()
         btntext[5..15] = AbsoluteSizeSpan(10 , true)
@@ -63,6 +70,11 @@ private lateinit var resumeViewModel : ResumeViewModel
 
                        NavHostFragment.findNavController(this).navigate(R.id.action_objectiveFragment_to_projectFragment,b)
         }
+
+        binding.btnPrevious.setOnClickListener {
+            NavHostFragment.findNavController(this).popBackStack()
+        }
+
     }
 
 }
